@@ -31,7 +31,7 @@
     "jwtSecretKey": "YjdmYzA0YzZiNDdkOGM3NDgyYjVjMWQ3OWUwMmY2ZmQzZmRjM2RmZjA3YmU2NmRjMGEyYzc0MTZjODQwNDA4NDhhMTczMmRiMDYwZjI3ZTI1NjIyOGZmNGRlNmI2ZjlkZjJkYjM4OTJhMGIwZjUwNGEzOGE4NmVjNjExNmJjNTM=",
     "embeddableLaunchScript": false,
     "clientTheme": "none",
-    "creationTimestamp": 1586028360840,
+    "creationTimestamp": 1586042160296,
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [],
