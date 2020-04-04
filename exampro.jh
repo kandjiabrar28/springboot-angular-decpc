@@ -1,0 +1,250 @@
+
+application {
+    config {
+        prodDatabaseType mysql
+        buildTool maven
+    }
+    entities *
+}
+entity Candidat{
+ 	prenom String,
+    nom String,
+    provenance String,
+    cni String,
+    telephone String,
+    sexe String,
+    datenais LocalDate,
+ niveau String,
+ dateCreation LocalDate,
+ dateModification LocalDate
+}
+
+entity Centre {
+	nom String,
+    region String,
+    departement String,
+    telephone String,
+    email String,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity Correcteur {
+	grade String,
+    prenom String,
+    nom String,
+    provenance String,
+    cni String,
+    telephone String,
+    sexe String,
+    datenais LocalDate,
+	dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+
+entity Examen {
+	nomexamen String,
+    dateCreation LocalDate,
+ 	dateModification LocalDate,
+}
+
+
+entity Jury {
+	numjury String,
+	 dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+
+entity Matiere {
+	
+    libmatiere String,
+    noteelimin Double,
+    coefficient Double,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+   
+}
+entity Niveau {
+	libniveau String
+     
+    //CS,
+    //CAP,
+   // BEP,
+   // BT,
+   // BTS,
+   // BEP,
+   // BP
+}
+entity Note {
+    note String,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity Plage {
+    plage String,
+    typecopie String,
+    nombrecopie Integer,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+//entity Profile {
+   // fonction String,
+   // dateCreation LocalDate,
+ 	//dateModification LocalDate
+//}
+entity PVSurveillance {
+    epreuve String,
+    heureDeb ZonedDateTime,
+    heureFin ZonedDateTime,
+    datesurv LocalDate,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity Salle {
+    numsalle Integer,
+    nomsalle String,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity Session {
+    nomsession String,
+    datesession LocalDate,
+    dateCreation LocalDate,
+ 	dateModification LocalDate,
+    specialite Specialite,
+   // examen Examen
+}
+    entity Filiere {
+	//AGRICOLE_AGROALIMENTAIRE,
+	//INDUSTRIEL_EXTRACTIF,
+	//NOUVELLES_TECHNOLOGIES,
+	//BATIMENT, 
+	//COMMERCE*/
+    nomfiliere String,
+    specialite Specialite,
+    }
+enum Specialite {
+    Conduite_Gestion_Exploitation_Agricole,
+Industrie_Agroalimentaire,
+Production_Vegetale,
+Maintenance_Machinerie_Agricole,
+Production_Equipements_Agricoles,
+Electromecanique,
+Electronique_Industrielle,
+Informatique_Industrielle_Automatique,
+Maintenance_Industrielle,
+Productique,
+Plasturgie,
+Gestion_Chaine_Approvisionnement_Logistique,
+Transit_Douane,
+Hygiene_Securite_Environnement,
+Geomatique,
+Energies_Renouvelables,
+Genie_Civil,
+Architecture_Design_Interieur,
+Electricite_Installation_Batiment,
+Froid_Climatisation_Plomberie,
+Maintenance_Installations_Batiment
+
+}
+entity Surveillant {
+    fonction String,
+    prenom String,
+    nom String,
+    provenance String,
+    cni String,
+    telephone String,
+    sexe String,
+    datenais LocalDate,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity Tables {
+    numtable Integer,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity TAnonym {
+    numanonym String,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+entity Tour {
+    numtour Integer,
+    dateCreation LocalDate,
+ 	dateModification LocalDate
+}
+
+
+
+relationship OneToMany {
+	Centre{salle} to Salle
+}
+relationship OneToMany {
+	Salle{tables} to Tables
+}
+relationship OneToMany {
+	Candidat{tanonym} to TAnonym
+}
+relationship OneToMany {
+	Candidat{note} to Note
+}
+
+relationship OneToOne {
+	Tables{candidat} to Candidat
+}
+
+relationship ManyToMany {
+	Salle{surveillant} to Surveillant{salle}
+}
+relationship ManyToMany {
+	Niveau{specialite} to Specialite{niveau}
+}
+relationship ManyToMany {
+	Matiere{correcteur} to Correcteur{matiere}
+}
+relationship ManyToMany {
+	Examen{jury} to Jury{examen}
+}
+
+
+
+relationship OneToMany {
+	TAnonym{tour} to Tour
+}
+
+relationship ManyToOne {
+	Examen{tour} to Tour
+}
+relationship ManyToOne {
+	Surveillant{pvsurveillance} to PVSurveillance
+}
+relationship ManyToOne {
+	Salle{pvsurveillance} to PVSurveillance
+}
+relationship ManyToOne {
+	Examen{session} to Session
+}
+//relationship ManyToOne {
+//	Session{specialite} to Specialite{session}
+//}
+relationship ManyToOne {
+	Plage{correcteur} to Correcteur
+}
+relationship ManyToOne {
+	Note{matiere} to Matiere
+}
+relationship ManyToOne {
+	Tour{matiere} to Matiere
+}
+// Set pagination options
+//paginate Candidat, Examen with infinite-scroll
+//paginate Note,Matiere with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl except candidat, Matiere
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
