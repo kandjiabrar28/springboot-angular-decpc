@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.examen.home.title">Examen</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-examen" [routerLink]="['/examen/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.examen.home.createLabel">
+            Create a new Examen
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="examen?.length === 0">
+        <span jhiTranslate="jhipsterApp.examen.home.notFound">No examen found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="examen?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.examen.nomexamen">Nomexamen</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.examen.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.examen.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.examen.tour">Tour</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.examen.jury">Jury</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let examen of examen ;trackBy: trackId">
+                    <td><a [routerLink]="['/examen', examen.id, 'view']">{{ examen.id }}</a></td>
+                    <td>{{ examen.nomexamen }}</td>
+                    <td>{{ examen.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ examen.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="examen.tour">
+                            <a [routerLink]="['/tour', examen.tour?.id, 'view']" >{{ examen.tour?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <span *ngFor="let jury of examen.juries; let last = last">
+                            <a class="form-control-static" [routerLink]="['/jury', jury?.id, 'view']">{{ jury.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/examen', examen.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/examen', examen.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(examen)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

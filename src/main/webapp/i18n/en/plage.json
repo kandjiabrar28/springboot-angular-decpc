@@ -1,0 +1,27 @@
+{
+  "jhipsterApp": {
+    "plage": {
+      "home": {
+        "title": "Plages",
+        "createLabel": "Create a new Plage",
+        "createOrEditLabel": "Create or edit a Plage",
+        "notFound": "No Plages found"
+      },
+      "created": "A new Plage is created with identifier {{ param }}",
+      "updated": "A Plage is updated with identifier {{ param }}",
+      "deleted": "A Plage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Plage {{ id }}?"
+      },
+      "detail": {
+        "title": "Plage"
+      },
+      "plage": "Plage",
+      "typecopie": "Typecopie",
+      "nombrecopie": "Nombrecopie",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "correcteur": "Correcteur"
+    }
+  }
+}

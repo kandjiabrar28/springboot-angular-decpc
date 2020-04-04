@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.tAnonym.home.title">T Anonyms</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-t-anonym" [routerLink]="['/t-anonym/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.tAnonym.home.createLabel">
+            Create a new T Anonym
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="tAnonyms?.length === 0">
+        <span jhiTranslate="jhipsterApp.tAnonym.home.notFound">No tAnonyms found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="tAnonyms?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.tAnonym.numanonym">Numanonym</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.tAnonym.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.tAnonym.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.tAnonym.candidat">Candidat</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tAnonym of tAnonyms ;trackBy: trackId">
+                    <td><a [routerLink]="['/t-anonym', tAnonym.id, 'view']">{{ tAnonym.id }}</a></td>
+                    <td>{{ tAnonym.numanonym }}</td>
+                    <td>{{ tAnonym.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ tAnonym.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="tAnonym.candidat">
+                            <a [routerLink]="['/candidat', tAnonym.candidat?.id, 'view']" >{{ tAnonym.candidat?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/t-anonym', tAnonym.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/t-anonym', tAnonym.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(tAnonym)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

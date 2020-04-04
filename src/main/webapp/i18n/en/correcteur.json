@@ -1,0 +1,32 @@
+{
+  "jhipsterApp": {
+    "correcteur": {
+      "home": {
+        "title": "Correcteurs",
+        "createLabel": "Create a new Correcteur",
+        "createOrEditLabel": "Create or edit a Correcteur",
+        "notFound": "No Correcteurs found"
+      },
+      "created": "A new Correcteur is created with identifier {{ param }}",
+      "updated": "A Correcteur is updated with identifier {{ param }}",
+      "deleted": "A Correcteur is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Correcteur {{ id }}?"
+      },
+      "detail": {
+        "title": "Correcteur"
+      },
+      "grade": "Grade",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "provenance": "Provenance",
+      "cni": "Cni",
+      "telephone": "Telephone",
+      "sexe": "Sexe",
+      "datenais": "Datenais",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "matiere": "Matiere"
+    }
+  }
+}

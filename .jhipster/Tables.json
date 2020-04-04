@@ -1,0 +1,47 @@
+{
+    "name": "Tables",
+    "fields": [
+        {
+            "fieldName": "numtable",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "candidat",
+            "otherEntityRelationshipName": "tables",
+            "relationshipName": "candidat",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "salle",
+            "otherEntityRelationshipName": "tables",
+            "relationshipName": "salle",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200404193800",
+    "entityTableName": "tables",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

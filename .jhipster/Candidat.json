@@ -1,0 +1,72 @@
+{
+    "name": "Candidat",
+    "fields": [
+        {
+            "fieldName": "prenom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "provenance",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cni",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sexe",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "datenais",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "niveau",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tAnonym",
+            "otherEntityRelationshipName": "candidat",
+            "relationshipName": "tanonym"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "note",
+            "otherEntityRelationshipName": "candidat",
+            "relationshipName": "note"
+        }
+    ],
+    "changelogDate": "20200404192700",
+    "entityTableName": "candidat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

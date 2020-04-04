@@ -1,0 +1,46 @@
+{
+    "name": "Note",
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "matiere",
+            "otherEntityRelationshipName": "note",
+            "relationshipName": "matiere",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "candidat",
+            "otherEntityRelationshipName": "note",
+            "relationshipName": "candidat",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200404193300",
+    "entityTableName": "note",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

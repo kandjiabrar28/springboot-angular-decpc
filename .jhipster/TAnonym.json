@@ -1,0 +1,45 @@
+{
+    "name": "TAnonym",
+    "fields": [
+        {
+            "fieldName": "numanonym",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tour",
+            "otherEntityRelationshipName": "tAnonym",
+            "relationshipName": "tour"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "candidat",
+            "otherEntityRelationshipName": "tanonym",
+            "relationshipName": "candidat",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200404193900",
+    "entityTableName": "t_anonym",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

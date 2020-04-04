@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="surveillant">
+            <h2><span jhiTranslate="jhipsterApp.surveillant.detail.title">Surveillant</span> {{ surveillant.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.surveillant.fonction">Fonction</span></dt>
+                <dd>
+                    <span>{{ surveillant.fonction }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.prenom">Prenom</span></dt>
+                <dd>
+                    <span>{{ surveillant.prenom }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.nom">Nom</span></dt>
+                <dd>
+                    <span>{{ surveillant.nom }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.provenance">Provenance</span></dt>
+                <dd>
+                    <span>{{ surveillant.provenance }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.cni">Cni</span></dt>
+                <dd>
+                    <span>{{ surveillant.cni }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ surveillant.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.sexe">Sexe</span></dt>
+                <dd>
+                    <span>{{ surveillant.sexe }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.datenais">Datenais</span></dt>
+                <dd>
+                    <span>{{ surveillant.datenais }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.dateCreation">Date Creation</span></dt>
+                <dd>
+                    <span>{{ surveillant.dateCreation }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.dateModification">Date Modification</span></dt>
+                <dd>
+                    <span>{{ surveillant.dateModification }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.surveillant.pvsurveillance">Pvsurveillance</span></dt>
+                <dd>
+                    <div *ngIf="surveillant.pvsurveillance">
+                        <a [routerLink]="['/pv-surveillance', surveillant.pvsurveillance?.id, 'view']">{{ surveillant.pvsurveillance?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/surveillant', surveillant.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "jhipsterApp": {
+    "pVSurveillance": {
+      "home": {
+        "title": "PVSurveillances",
+        "createLabel": "Créer un nouveau PV Surveillance",
+        "createOrEditLabel": "Créer ou éditer un PV Surveillance",
+        "notFound": "Aucun PV Surveillance trouvé"
+      },
+      "created": "Un nouveau PV Surveillance a été créé avec l'identifiant {{ param }}",
+      "updated": "Le PV Surveillance avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le PV Surveillance avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le PV Surveillance {{ id }} ?"
+      },
+      "detail": {
+        "title": "PV Surveillance"
+      },
+      "epreuve": "Epreuve",
+      "heureDeb": "Heure Deb",
+      "heureFin": "Heure Fin",
+      "datesurv": "Datesurv",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "jhipsterApp": {
+    "matiere": {
+      "home": {
+        "title": "Matieres",
+        "createLabel": "Créer un nouveau Matiere",
+        "createOrEditLabel": "Créer ou éditer un Matiere",
+        "notFound": "Aucun Matiere trouvé"
+      },
+      "created": "Un nouveau Matiere a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Matiere avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Matiere avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Matiere {{ id }} ?"
+      },
+      "detail": {
+        "title": "Matiere"
+      },
+      "libmatiere": "Libmatiere",
+      "noteelimin": "Noteelimin",
+      "coefficient": "Coefficient",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "correcteur": "Correcteur"
+    }
+  }
+}

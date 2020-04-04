@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pVSurveillance">
+            <h2><span jhiTranslate="jhipsterApp.pVSurveillance.detail.title">PV Surveillance</span> {{ pVSurveillance.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.epreuve">Epreuve</span></dt>
+                <dd>
+                    <span>{{ pVSurveillance.epreuve }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.heureDeb">Heure Deb</span></dt>
+                <dd>
+                    <span>{{ pVSurveillance.heureDeb }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.heureFin">Heure Fin</span></dt>
+                <dd>
+                    <span>{{ pVSurveillance.heureFin }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.datesurv">Datesurv</span></dt>
+                <dd>
+                    <span>{{ pVSurveillance.datesurv }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.dateCreation">Date Creation</span></dt>
+                <dd>
+                    <span>{{ pVSurveillance.dateCreation }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.dateModification">Date Modification</span></dt>
+                <dd>
+                    <span>{{ pVSurveillance.dateModification }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pv-surveillance', pVSurveillance.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

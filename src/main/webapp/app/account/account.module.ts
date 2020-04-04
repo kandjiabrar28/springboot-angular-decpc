@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ExamProSharedModule } from 'app/shared/shared.module';
+import { JhipsterSharedModule } from 'app/shared/shared.module';
 
 import { PasswordStrengthBarComponent } from './password/password-strength-bar.component';
 import { RegisterComponent } from './register/register.component';
@@ -13,7 +13,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { accountState } from './account.route';
 
 @NgModule({
-  imports: [ExamProSharedModule, RouterModule.forChild(accountState)],
+  imports: [JhipsterSharedModule, RouterModule.forChild(accountState)],
   declarations: [
     ActivateComponent,
     RegisterComponent,

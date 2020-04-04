@@ -1,0 +1,68 @@
+{
+    "name": "Correcteur",
+    "fields": [
+        {
+            "fieldName": "grade",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prenom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "provenance",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cni",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sexe",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "datenais",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "matiere",
+            "otherEntityRelationshipName": "correcteur",
+            "relationshipName": "matiere",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200404192900",
+    "entityTableName": "correcteur",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

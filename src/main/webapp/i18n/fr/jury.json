@@ -1,0 +1,25 @@
+{
+  "jhipsterApp": {
+    "jury": {
+      "home": {
+        "title": "Juries",
+        "createLabel": "Créer un nouveau Jury",
+        "createOrEditLabel": "Créer ou éditer un Jury",
+        "notFound": "Aucun Jury trouvé"
+      },
+      "created": "Un nouveau Jury a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Jury avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Jury avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Jury {{ id }} ?"
+      },
+      "detail": {
+        "title": "Jury"
+      },
+      "numjury": "Numjury",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "examen": "Examen"
+    }
+  }
+}

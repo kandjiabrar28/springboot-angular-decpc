@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    com.decpc.exampro: DEBUG
+    com.mycompany.myapp: DEBUG
 
 spring:
   profiles:
@@ -37,8 +37,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/exampro;DB_CLOSE_DELAY=-1
-    username: ExamPro
+    url: jdbc:h2:file:./target/h2db/db/jhipster;DB_CLOSE_DELAY=-1
+    username: jhipster
     password:
     hikari:
       poolName: Hikari

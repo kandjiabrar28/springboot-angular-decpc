@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="correcteur">
+            <h2><span jhiTranslate="jhipsterApp.correcteur.detail.title">Correcteur</span> {{ correcteur.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.correcteur.grade">Grade</span></dt>
+                <dd>
+                    <span>{{ correcteur.grade }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.prenom">Prenom</span></dt>
+                <dd>
+                    <span>{{ correcteur.prenom }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.nom">Nom</span></dt>
+                <dd>
+                    <span>{{ correcteur.nom }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.provenance">Provenance</span></dt>
+                <dd>
+                    <span>{{ correcteur.provenance }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.cni">Cni</span></dt>
+                <dd>
+                    <span>{{ correcteur.cni }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ correcteur.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.sexe">Sexe</span></dt>
+                <dd>
+                    <span>{{ correcteur.sexe }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.datenais">Datenais</span></dt>
+                <dd>
+                    <span>{{ correcteur.datenais }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.dateCreation">Date Creation</span></dt>
+                <dd>
+                    <span>{{ correcteur.dateCreation }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.dateModification">Date Modification</span></dt>
+                <dd>
+                    <span>{{ correcteur.dateModification }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/correcteur', correcteur.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

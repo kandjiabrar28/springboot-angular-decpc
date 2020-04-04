@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.surveillant.home.title">Surveillants</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-surveillant" [routerLink]="['/surveillant/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.surveillant.home.createLabel">
+            Create a new Surveillant
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="surveillants?.length === 0">
+        <span jhiTranslate="jhipsterApp.surveillant.home.notFound">No surveillants found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="surveillants?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.fonction">Fonction</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.prenom">Prenom</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.nom">Nom</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.provenance">Provenance</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.cni">Cni</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.telephone">Telephone</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.sexe">Sexe</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.datenais">Datenais</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.pvsurveillance">Pvsurveillance</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let surveillant of surveillants ;trackBy: trackId">
+                    <td><a [routerLink]="['/surveillant', surveillant.id, 'view']">{{ surveillant.id }}</a></td>
+                    <td>{{ surveillant.fonction }}</td>
+                    <td>{{ surveillant.prenom }}</td>
+                    <td>{{ surveillant.nom }}</td>
+                    <td>{{ surveillant.provenance }}</td>
+                    <td>{{ surveillant.cni }}</td>
+                    <td>{{ surveillant.telephone }}</td>
+                    <td>{{ surveillant.sexe }}</td>
+                    <td>{{ surveillant.datenais | date:'mediumDate' }}</td>
+                    <td>{{ surveillant.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ surveillant.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="surveillant.pvsurveillance">
+                            <a [routerLink]="['/pv-surveillance', surveillant.pvsurveillance?.id, 'view']" >{{ surveillant.pvsurveillance?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/surveillant', surveillant.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/surveillant', surveillant.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(surveillant)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

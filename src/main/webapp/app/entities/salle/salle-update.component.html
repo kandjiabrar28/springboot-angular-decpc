@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-salle-heading" jhiTranslate="jhipsterApp.salle.home.createOrEditLabel">Create or edit a Salle</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.salle.numsalle" for="field_numsalle">Numsalle</label>
+                    <input type="number" class="form-control" name="numsalle" id="field_numsalle"
+                           formControlName="numsalle"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.salle.nomsalle" for="field_nomsalle">Nomsalle</label>
+                    <input type="text" class="form-control" name="nomsalle" id="field_nomsalle"
+                           formControlName="nomsalle"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.salle.dateCreation" for="field_dateCreation">Date Creation</label>
+                    <div class="input-group">
+                        <input id="field_dateCreation" type="text" class="form-control" name="dateCreation" ngbDatepicker #dateCreationDp="ngbDatepicker" formControlName="dateCreation"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.salle.dateModification" for="field_dateModification">Date Modification</label>
+                    <div class="input-group">
+                        <input id="field_dateModification" type="text" class="form-control" name="dateModification" ngbDatepicker #dateModificationDp="ngbDatepicker" formControlName="dateModification"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateModificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.salle.pvsurveillance" for="field_pvsurveillance">Pvsurveillance</label>
+                    <select class="form-control" id="field_pvsurveillance" name="pvsurveillance" formControlName="pvsurveillance">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="pVSurveillanceOption.id === editForm.get('pvsurveillance')!.value?.id ? editForm.get('pvsurveillance')!.value : pVSurveillanceOption" *ngFor="let pVSurveillanceOption of pvsurveillances; trackBy: trackById">{{ pVSurveillanceOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="jhipsterApp.salle.surveillant" for="field_surveillants">Surveillant</label>
+                    <select class="form-control" id="field_surveillants" multiple name="surveillants" formControlName="surveillants">
+                        <option [ngValue]="getSelected(editForm.get('surveillants')!.value, surveillantOption)" *ngFor="let surveillantOption of surveillants; trackBy: trackById">{{ surveillantOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.salle.centre" for="field_centre">Centre</label>
+                    <select class="form-control" id="field_centre" name="centre" formControlName="centre">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="centreOption.id === editForm.get('centre')!.value?.id ? editForm.get('centre')!.value : centreOption" *ngFor="let centreOption of centres; trackBy: trackById">{{ centreOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

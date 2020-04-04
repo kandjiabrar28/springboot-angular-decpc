@@ -1,0 +1,47 @@
+{
+    "name": "Plage",
+    "fields": [
+        {
+            "fieldName": "plage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "typecopie",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombrecopie",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "correcteur",
+            "otherEntityRelationshipName": "plage",
+            "relationshipName": "correcteur",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200404193400",
+    "entityTableName": "plage",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

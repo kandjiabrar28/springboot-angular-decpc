@@ -1,0 +1,26 @@
+{
+  "jhipsterApp": {
+    "tables": {
+      "home": {
+        "title": "Tables",
+        "createLabel": "Create a new Tables",
+        "createOrEditLabel": "Create or edit a Tables",
+        "notFound": "No Tables found"
+      },
+      "created": "A new Tables is created with identifier {{ param }}",
+      "updated": "A Tables is updated with identifier {{ param }}",
+      "deleted": "A Tables is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tables {{ id }}?"
+      },
+      "detail": {
+        "title": "Tables"
+      },
+      "numtable": "Numtable",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "candidat": "Candidat",
+      "salle": "Salle"
+    }
+  }
+}

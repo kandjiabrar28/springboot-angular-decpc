@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "exam-pro": {
+    "jhipster": {
       "root": "",
       "sourceRoot": "src/main/webapp",
       "projectType": "application",
@@ -29,7 +29,7 @@
       "architect": {}
     }
   },
-  "defaultProject": "exam-pro",
+  "defaultProject": "jhipster",
   "cli": {
     "packageManager": "npm"
   }
