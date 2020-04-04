@@ -114,15 +114,15 @@ entity Salle {
  //   specialite Specialite,
    // examen Examen
 //}
-    //entity Filiere {
+    entity Filiere {
 	//AGRICOLE_AGROALIMENTAIRE,
 	//INDUSTRIEL_EXTRACTIF,
 	//NOUVELLES_TECHNOLOGIES,
 	//BATIMENT, 
 	//COMMERCE*/
     //nomfiliere String,
-    //specialite Specialite,
-   // }
+    specialite Specialite,
+   }
 enum Specialite {
     Conduite_Gestion_Exploitation_Agricole,
 Industrie_Agroalimentaire,
@@ -206,6 +206,10 @@ relationship ManyToMany {
 relationship ManyToMany {
 	Examen{jury} to Jury{examen}
 }
+relationship ManyToMany {
+	Specialite{examen} to Examen{specialite}
+}
+
 
 
 
