@@ -1,0 +1,29 @@
+{
+  "jhipsterApp": {
+    "salle": {
+      "home": {
+        "title": "Salles",
+        "createLabel": "Créer un nouveau Salle",
+        "createOrEditLabel": "Créer ou éditer un Salle",
+        "notFound": "Aucun Salle trouvé"
+      },
+      "created": "Un nouveau Salle a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Salle avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Salle avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Salle {{ id }} ?"
+      },
+      "detail": {
+        "title": "Salle"
+      },
+      "numsalle": "Numsalle",
+      "nomsalle": "Nomsalle",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "tables": "Tables",
+      "pvsurveillance": "Pvsurveillance",
+      "surveillant": "Surveillant",
+      "centre": "Centre"
+    }
+  }
+}

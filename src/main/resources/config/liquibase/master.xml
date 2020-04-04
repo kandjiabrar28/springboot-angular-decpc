@@ -14,6 +14,29 @@
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404192700_added_entity_Candidat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404192800_added_entity_Centre.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404192900_added_entity_Correcteur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193000_added_entity_Examen.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193100_added_entity_Jury.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193200_added_entity_Matiere.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193300_added_entity_Note.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193400_added_entity_Plage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193500_added_entity_PVSurveillance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193600_added_entity_Salle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193700_added_entity_Surveillant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193800_added_entity_Tables.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193900_added_entity_TAnonym.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404194000_added_entity_Tour.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200404193000_added_entity_constraints_Examen.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193200_added_entity_constraints_Matiere.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193300_added_entity_constraints_Note.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193400_added_entity_constraints_Plage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193600_added_entity_constraints_Salle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193700_added_entity_constraints_Surveillant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193800_added_entity_constraints_Tables.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404193900_added_entity_constraints_TAnonym.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200404194000_added_entity_constraints_Tour.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

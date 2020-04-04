@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="matiere">
+            <h2><span jhiTranslate="jhipsterApp.matiere.detail.title">Matiere</span> {{ matiere.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.matiere.libmatiere">Libmatiere</span></dt>
+                <dd>
+                    <span>{{ matiere.libmatiere }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.matiere.noteelimin">Noteelimin</span></dt>
+                <dd>
+                    <span>{{ matiere.noteelimin }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.matiere.coefficient">Coefficient</span></dt>
+                <dd>
+                    <span>{{ matiere.coefficient }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.matiere.dateCreation">Date Creation</span></dt>
+                <dd>
+                    <span>{{ matiere.dateCreation }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.matiere.dateModification">Date Modification</span></dt>
+                <dd>
+                    <span>{{ matiere.dateModification }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.matiere.correcteur">Correcteur</span></dt>
+                <dd>
+                    <span *ngFor="let correcteur of matiere.correcteurs; let last = last">
+                        <a [routerLink]="['/correcteur', correcteur?.id, 'view']">{{ correcteur.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/matiere', matiere.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

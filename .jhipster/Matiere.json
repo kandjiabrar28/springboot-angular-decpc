@@ -1,0 +1,48 @@
+{
+    "name": "Matiere",
+    "fields": [
+        {
+            "fieldName": "libmatiere",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "noteelimin",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "coefficient",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "correcteur",
+            "otherEntityRelationshipName": "matiere",
+            "relationshipName": "correcteur",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200404193200",
+    "entityTableName": "matiere",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

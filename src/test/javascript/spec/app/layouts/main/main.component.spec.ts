@@ -5,7 +5,7 @@ import { Subject, of } from 'rxjs';
 import { TranslateModule, TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 import { MainComponent } from 'app/layouts/main/main.component';
-import { ExamProTestModule } from '../../../test.module';
+import { JhipsterTestModule } from '../../../test.module';
 import { MockRouter } from '../../../helpers/mock-route.service';
 
 describe('Component Tests', () => {
@@ -19,7 +19,7 @@ describe('Component Tests', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        imports: [ExamProTestModule, TranslateModule.forRoot()],
+        imports: [JhipsterTestModule, TranslateModule.forRoot()],
         declarations: [MainComponent],
         providers: [Title]
       })
@@ -42,7 +42,7 @@ describe('Component Tests', () => {
       const parentRoutePageTitle = 'parentTitle';
       const childRoutePageTitle = 'childTitle';
       const navigationEnd = new NavigationEnd(1, '', '');
-      const langChangeEvent: LangChangeEvent = { lang: 'fr', translations: null };
+      const langChangeEvent: LangChangeEvent = { lang: 'en', translations: null };
 
       beforeEach(() => {
         routerState = { snapshot: { root: {} } };
@@ -50,7 +50,7 @@ describe('Component Tests', () => {
         spyOn(translateService, 'get').and.callFake((key: string) => {
           return of(key + ' translated');
         });
-        translateService.currentLang = 'fr';
+        translateService.currentLang = 'en';
         spyOn(titleService, 'setTitle');
         comp.ngOnInit();
       });

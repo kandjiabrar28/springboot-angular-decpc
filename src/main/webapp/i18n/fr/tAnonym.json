@@ -1,0 +1,26 @@
+{
+  "jhipsterApp": {
+    "tAnonym": {
+      "home": {
+        "title": "TAnonyms",
+        "createLabel": "Créer un nouveau T Anonym",
+        "createOrEditLabel": "Créer ou éditer un T Anonym",
+        "notFound": "Aucun T Anonym trouvé"
+      },
+      "created": "Un nouveau T Anonym a été créé avec l'identifiant {{ param }}",
+      "updated": "Le T Anonym avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le T Anonym avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le T Anonym {{ id }} ?"
+      },
+      "detail": {
+        "title": "T Anonym"
+      },
+      "numanonym": "Numanonym",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "tour": "Tour",
+      "candidat": "Candidat"
+    }
+  }
+}

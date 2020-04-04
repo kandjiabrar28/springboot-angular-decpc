@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="salle">
+            <h2><span jhiTranslate="jhipsterApp.salle.detail.title">Salle</span> {{ salle.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.salle.numsalle">Numsalle</span></dt>
+                <dd>
+                    <span>{{ salle.numsalle }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.salle.nomsalle">Nomsalle</span></dt>
+                <dd>
+                    <span>{{ salle.nomsalle }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.salle.dateCreation">Date Creation</span></dt>
+                <dd>
+                    <span>{{ salle.dateCreation }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.salle.dateModification">Date Modification</span></dt>
+                <dd>
+                    <span>{{ salle.dateModification }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.salle.pvsurveillance">Pvsurveillance</span></dt>
+                <dd>
+                    <div *ngIf="salle.pvsurveillance">
+                        <a [routerLink]="['/pv-surveillance', salle.pvsurveillance?.id, 'view']">{{ salle.pvsurveillance?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.salle.surveillant">Surveillant</span></dt>
+                <dd>
+                    <span *ngFor="let surveillant of salle.surveillants; let last = last">
+                        <a [routerLink]="['/surveillant', surveillant?.id, 'view']">{{ surveillant.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.salle.centre">Centre</span></dt>
+                <dd>
+                    <div *ngIf="salle.centre">
+                        <a [routerLink]="['/centre', salle.centre?.id, 'view']">{{ salle.centre?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/salle', salle.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

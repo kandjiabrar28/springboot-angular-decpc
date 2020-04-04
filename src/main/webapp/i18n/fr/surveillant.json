@@ -1,0 +1,33 @@
+{
+  "jhipsterApp": {
+    "surveillant": {
+      "home": {
+        "title": "Surveillants",
+        "createLabel": "Créer un nouveau Surveillant",
+        "createOrEditLabel": "Créer ou éditer un Surveillant",
+        "notFound": "Aucun Surveillant trouvé"
+      },
+      "created": "Un nouveau Surveillant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Surveillant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Surveillant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Surveillant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Surveillant"
+      },
+      "fonction": "Fonction",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "provenance": "Provenance",
+      "cni": "Cni",
+      "telephone": "Telephone",
+      "sexe": "Sexe",
+      "datenais": "Datenais",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "pvsurveillance": "Pvsurveillance",
+      "salle": "Salle"
+    }
+  }
+}

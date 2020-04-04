@@ -1,0 +1,26 @@
+{
+  "jhipsterApp": {
+    "tour": {
+      "home": {
+        "title": "Tours",
+        "createLabel": "Créer un nouveau Tour",
+        "createOrEditLabel": "Créer ou éditer un Tour",
+        "notFound": "Aucun Tour trouvé"
+      },
+      "created": "Un nouveau Tour a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Tour avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Tour avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Tour {{ id }} ?"
+      },
+      "detail": {
+        "title": "Tour"
+      },
+      "numtour": "Numtour",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "matiere": "Matiere",
+      "tAnonym": "T Anonym"
+    }
+  }
+}

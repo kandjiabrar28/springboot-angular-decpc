@@ -1,0 +1,64 @@
+{
+    "name": "Salle",
+    "fields": [
+        {
+            "fieldName": "numsalle",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "nomsalle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tables",
+            "otherEntityRelationshipName": "salle",
+            "relationshipName": "tables"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "pVSurveillance",
+            "otherEntityRelationshipName": "salle",
+            "relationshipName": "pvsurveillance",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "surveillant",
+            "otherEntityRelationshipName": "salle",
+            "relationshipName": "surveillant",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "centre",
+            "otherEntityRelationshipName": "salle",
+            "relationshipName": "centre",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200404193600",
+    "entityTableName": "salle",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.jury.home.title">Juries</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-jury" [routerLink]="['/jury/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.jury.home.createLabel">
+            Create a new Jury
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="juries?.length === 0">
+        <span jhiTranslate="jhipsterApp.jury.home.notFound">No juries found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="juries?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jury.numjury">Numjury</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jury.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.jury.dateModification">Date Modification</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let jury of juries ;trackBy: trackId">
+                    <td><a [routerLink]="['/jury', jury.id, 'view']">{{ jury.id }}</a></td>
+                    <td>{{ jury.numjury }}</td>
+                    <td>{{ jury.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ jury.dateModification | date:'mediumDate' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/jury', jury.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/jury', jury.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(jury)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

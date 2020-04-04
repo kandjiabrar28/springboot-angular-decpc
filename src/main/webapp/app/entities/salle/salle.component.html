@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.salle.home.title">Salles</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-salle" [routerLink]="['/salle/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.salle.home.createLabel">
+            Create a new Salle
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="salles?.length === 0">
+        <span jhiTranslate="jhipsterApp.salle.home.notFound">No salles found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="salles?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.numsalle">Numsalle</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.nomsalle">Nomsalle</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.pvsurveillance">Pvsurveillance</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.surveillant">Surveillant</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.centre">Centre</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let salle of salles ;trackBy: trackId">
+                    <td><a [routerLink]="['/salle', salle.id, 'view']">{{ salle.id }}</a></td>
+                    <td>{{ salle.numsalle }}</td>
+                    <td>{{ salle.nomsalle }}</td>
+                    <td>{{ salle.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ salle.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="salle.pvsurveillance">
+                            <a [routerLink]="['/pv-surveillance', salle.pvsurveillance?.id, 'view']" >{{ salle.pvsurveillance?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <span *ngFor="let surveillant of salle.surveillants; let last = last">
+                            <a class="form-control-static" [routerLink]="['/surveillant', surveillant?.id, 'view']">{{ surveillant.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td>
+                        <div *ngIf="salle.centre">
+                            <a [routerLink]="['/centre', salle.centre?.id, 'view']" >{{ salle.centre?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/salle', salle.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/salle', salle.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(salle)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

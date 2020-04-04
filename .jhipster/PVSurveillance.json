@@ -1,0 +1,43 @@
+{
+    "name": "PVSurveillance",
+    "fields": [
+        {
+            "fieldName": "epreuve",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "heureDeb",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "heureFin",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "datesurv",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateModification",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200404193500",
+    "entityTableName": "pv_surveillance",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

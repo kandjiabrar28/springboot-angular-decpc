@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.pVSurveillance.home.title">PV Surveillances</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pv-surveillance" [routerLink]="['/pv-surveillance/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.pVSurveillance.home.createLabel">
+            Create a new PV Surveillance
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="pVSurveillances?.length === 0">
+        <span jhiTranslate="jhipsterApp.pVSurveillance.home.notFound">No pVSurveillances found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="pVSurveillances?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.epreuve">Epreuve</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.heureDeb">Heure Deb</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.heureFin">Heure Fin</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.datesurv">Datesurv</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.dateModification">Date Modification</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pVSurveillance of pVSurveillances ;trackBy: trackId">
+                    <td><a [routerLink]="['/pv-surveillance', pVSurveillance.id, 'view']">{{ pVSurveillance.id }}</a></td>
+                    <td>{{ pVSurveillance.epreuve }}</td>
+                    <td>{{ pVSurveillance.heureDeb | date:'medium' }}</td>
+                    <td>{{ pVSurveillance.heureFin | date:'medium' }}</td>
+                    <td>{{ pVSurveillance.datesurv | date:'mediumDate' }}</td>
+                    <td>{{ pVSurveillance.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ pVSurveillance.dateModification | date:'mediumDate' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/pv-surveillance', pVSurveillance.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/pv-surveillance', pVSurveillance.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(pVSurveillance)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

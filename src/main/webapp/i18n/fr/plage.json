@@ -1,0 +1,27 @@
+{
+  "jhipsterApp": {
+    "plage": {
+      "home": {
+        "title": "Plages",
+        "createLabel": "Créer un nouveau Plage",
+        "createOrEditLabel": "Créer ou éditer un Plage",
+        "notFound": "Aucun Plage trouvé"
+      },
+      "created": "Un nouveau Plage a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Plage avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Plage avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Plage {{ id }} ?"
+      },
+      "detail": {
+        "title": "Plage"
+      },
+      "plage": "Plage",
+      "typecopie": "Typecopie",
+      "nombrecopie": "Nombrecopie",
+      "dateCreation": "Date Creation",
+      "dateModification": "Date Modification",
+      "correcteur": "Correcteur"
+    }
+  }
+}

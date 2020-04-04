@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.candidat.home.title">Candidats</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-candidat" [routerLink]="['/candidat/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.candidat.home.createLabel">
+            Create a new Candidat
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="candidats?.length === 0">
+        <span jhiTranslate="jhipsterApp.candidat.home.notFound">No candidats found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="candidats?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.prenom">Prenom</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.nom">Nom</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.provenance">Provenance</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.cni">Cni</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.telephone">Telephone</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.sexe">Sexe</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.datenais">Datenais</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.niveau">Niveau</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.dateCreation">Date Creation</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.dateModification">Date Modification</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let candidat of candidats ;trackBy: trackId">
+                    <td><a [routerLink]="['/candidat', candidat.id, 'view']">{{ candidat.id }}</a></td>
+                    <td>{{ candidat.prenom }}</td>
+                    <td>{{ candidat.nom }}</td>
+                    <td>{{ candidat.provenance }}</td>
+                    <td>{{ candidat.cni }}</td>
+                    <td>{{ candidat.telephone }}</td>
+                    <td>{{ candidat.sexe }}</td>
+                    <td>{{ candidat.datenais | date:'mediumDate' }}</td>
+                    <td>{{ candidat.niveau }}</td>
+                    <td>{{ candidat.dateCreation | date:'mediumDate' }}</td>
+                    <td>{{ candidat.dateModification | date:'mediumDate' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/candidat', candidat.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/candidat', candidat.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(candidat)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

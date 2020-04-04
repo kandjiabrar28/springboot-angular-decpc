@@ -1,7 +1,7 @@
 {
-  "name": "exam-pro",
+  "name": "jhipster",
   "version": "0.0.1-SNAPSHOT",
-  "description": "Description for ExamPro",
+  "description": "Description for jhipster",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [
