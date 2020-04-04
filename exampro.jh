@@ -63,18 +63,18 @@ entity Matiere {
  	dateModification LocalDate
    
 }
-//entity Niveau {
+enum Niveau {
 	//libniveau String,
-   // specialite Specialite
+   //specialite Specialite
      
-    //CS,
-    //CAP,
-   // BEP,
-   // BT,
-   // BTS,
-   // BEP,
-   // BP
-//}
+    CS,
+   CAP,
+   BEP,
+   BT,
+   BTS,
+   BEP,
+   BP
+}
 entity Note {
     note String,
     dateCreation LocalDate,
@@ -114,15 +114,15 @@ entity Salle {
  //   specialite Specialite,
    // examen Examen
 //}
-    //entity Filiere {
-	//AGRICOLE_AGROALIMENTAIRE,
-	//INDUSTRIEL_EXTRACTIF,
-	//NOUVELLES_TECHNOLOGIES,
-	//BATIMENT, 
-	//COMMERCE*/
+    enum Filiere {
+	AGRICOLE_AGROALIMENTAIRE,
+	INDUSTRIEL_EXTRACTIF,
+	NOUVELLES_TECHNOLOGIES,
+	BATIMENT, 
+	COMMERCE,
     //nomfiliere String,
-    //specialite Specialite,
-   // }
+    Specialite
+   }
 enum Specialite {
     Conduite_Gestion_Exploitation_Agricole,
 Industrie_Agroalimentaire,
@@ -189,6 +189,9 @@ relationship OneToMany {
 relationship OneToMany {
 	Candidat{note} to Note
 }
+relationship OneToMany {
+	Filiere{specialite} to Specialite
+}
 
 relationship OneToOne {
 	Tables{candidat} to Candidat
@@ -206,6 +209,12 @@ relationship ManyToMany {
 relationship ManyToMany {
 	Examen{jury} to Jury{examen}
 }
+relationship ManyToMany {
+	Specialite{examen} to Examen{specialite}
+}
+relationship ManyToMany {
+	Niveau{specialite} to Specialite{niveau}
+    }
 
 
 
