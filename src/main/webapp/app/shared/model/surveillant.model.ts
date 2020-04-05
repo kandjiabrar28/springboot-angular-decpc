@@ -1,6 +1,5 @@
 import { Moment } from 'moment';
 import { IPVSurveillance } from 'app/shared/model/pv-surveillance.model';
-import { ISalle } from 'app/shared/model/salle.model';
 
 export interface ISurveillant {
   id?: number;
@@ -12,10 +11,7 @@ export interface ISurveillant {
   telephone?: string;
   sexe?: string;
   datenais?: Moment;
-  dateCreation?: Moment;
-  dateModification?: Moment;
-  pvsurveillance?: IPVSurveillance;
-  salles?: ISalle[];
+  pvsurveillances?: IPVSurveillance[];
 }
 
 export class Surveillant implements ISurveillant {
@@ -29,9 +25,6 @@ export class Surveillant implements ISurveillant {
     public telephone?: string,
     public sexe?: string,
     public datenais?: Moment,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
-    public pvsurveillance?: IPVSurveillance,
-    public salles?: ISalle[]
+    public pvsurveillances?: IPVSurveillance[]
   ) {}
 }

@@ -25,10 +25,6 @@
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.salle.numsalle">Numsalle</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.salle.nomsalle">Nomsalle</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.dateModification">Date Modification</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.pvsurveillance">Pvsurveillance</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.salle.surveillant">Surveillant</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.salle.centre">Centre</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -38,18 +34,6 @@
                     <td><a [routerLink]="['/salle', salle.id, 'view']">{{ salle.id }}</a></td>
                     <td>{{ salle.numsalle }}</td>
                     <td>{{ salle.nomsalle }}</td>
-                    <td>{{ salle.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ salle.dateModification | date:'mediumDate' }}</td>
-                    <td>
-                        <div *ngIf="salle.pvsurveillance">
-                            <a [routerLink]="['/pv-surveillance', salle.pvsurveillance?.id, 'view']" >{{ salle.pvsurveillance?.id }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <span *ngFor="let surveillant of salle.surveillants; let last = last">
-                            <a class="form-control-static" [routerLink]="['/surveillant', surveillant?.id, 'view']">{{ surveillant.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
                     <td>
                         <div *ngIf="salle.centre">
                             <a [routerLink]="['/centre', salle.centre?.id, 'view']" >{{ salle.centre?.id }}</a>

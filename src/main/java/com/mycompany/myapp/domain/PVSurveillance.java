@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -36,11 +37,13 @@ public class PVSurveillance implements Serializable {
     @Column(name = "datesurv")
     private LocalDate datesurv;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
+    @ManyToOne
+    @JsonIgnoreProperties("pvsurveillances")
+    private Salle salle;
 
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
+    @ManyToOne
+    @JsonIgnoreProperties("pvsurveillances")
+    private Surveillant surveillant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -103,30 +106,30 @@ public class PVSurveillance implements Serializable {
         this.datesurv = datesurv;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
+    public Salle getSalle() {
+        return salle;
     }
 
-    public PVSurveillance dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public PVSurveillance salle(Salle salle) {
+        this.salle = salle;
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public void setSalle(Salle salle) {
+        this.salle = salle;
     }
 
-    public LocalDate getDateModification() {
-        return dateModification;
+    public Surveillant getSurveillant() {
+        return surveillant;
     }
 
-    public PVSurveillance dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public PVSurveillance surveillant(Surveillant surveillant) {
+        this.surveillant = surveillant;
         return this;
     }
 
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public void setSurveillant(Surveillant surveillant) {
+        this.surveillant = surveillant;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -154,8 +157,6 @@ public class PVSurveillance implements Serializable {
             ", heureDeb='" + getHeureDeb() + "'" +
             ", heureFin='" + getHeureFin() + "'" +
             ", datesurv='" + getDatesurv() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

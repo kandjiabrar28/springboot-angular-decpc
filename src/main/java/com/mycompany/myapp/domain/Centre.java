@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,12 +38,6 @@ public class Centre implements Serializable {
 
     @Column(name = "email")
     private String email;
-
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
 
     @OneToMany(mappedBy = "centre")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -124,32 +117,6 @@ public class Centre implements Serializable {
         this.email = email;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
-    }
-
-    public Centre dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-        return this;
-    }
-
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Centre dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-        return this;
-    }
-
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-    }
-
     public Set<Salle> getSalles() {
         return salles;
     }
@@ -201,8 +168,6 @@ public class Centre implements Serializable {
             ", departement='" + getDepartement() + "'" +
             ", telephone='" + getTelephone() + "'" +
             ", email='" + getEmail() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

@@ -17,8 +17,8 @@
         "title": "Examen"
       },
       "nomexamen": "Nomexamen",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
+      "dateExamen": "Date Examen",
+      "session": "Session",
       "tour": "Tour",
       "jury": "Jury"
     }

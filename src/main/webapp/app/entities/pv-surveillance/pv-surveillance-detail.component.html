@@ -24,13 +24,17 @@
                 <dd>
                     <span>{{ pVSurveillance.datesurv }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.dateCreation">Date Creation</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.salle">Salle</span></dt>
                 <dd>
-                    <span>{{ pVSurveillance.dateCreation }}</span>
+                    <div *ngIf="pVSurveillance.salle">
+                        <a [routerLink]="['/salle', pVSurveillance.salle?.id, 'view']">{{ pVSurveillance.salle?.id }}</a>
+                    </div>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.dateModification">Date Modification</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.pVSurveillance.surveillant">Surveillant</span></dt>
                 <dd>
-                    <span>{{ pVSurveillance.dateModification }}</span>
+                    <div *ngIf="pVSurveillance.surveillant">
+                        <a [routerLink]="['/surveillant', pVSurveillance.surveillant?.id, 'view']">{{ pVSurveillance.surveillant?.id }}</a>
+                    </div>
                 </dd>
             </dl>
 

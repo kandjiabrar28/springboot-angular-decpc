@@ -51,10 +51,7 @@ export class CandidatService {
 
   protected convertDateFromClient(candidat: ICandidat): ICandidat {
     const copy: ICandidat = Object.assign({}, candidat, {
-      datenais: candidat.datenais && candidat.datenais.isValid() ? candidat.datenais.format(DATE_FORMAT) : undefined,
-      dateCreation: candidat.dateCreation && candidat.dateCreation.isValid() ? candidat.dateCreation.format(DATE_FORMAT) : undefined,
-      dateModification:
-        candidat.dateModification && candidat.dateModification.isValid() ? candidat.dateModification.format(DATE_FORMAT) : undefined
+      datenais: candidat.datenais && candidat.datenais.isValid() ? candidat.datenais.format(DATE_FORMAT) : undefined
     });
     return copy;
   }
@@ -62,8 +59,6 @@ export class CandidatService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.datenais = res.body.datenais ? moment(res.body.datenais) : undefined;
-      res.body.dateCreation = res.body.dateCreation ? moment(res.body.dateCreation) : undefined;
-      res.body.dateModification = res.body.dateModification ? moment(res.body.dateModification) : undefined;
     }
     return res;
   }
@@ -72,8 +67,6 @@ export class CandidatService {
     if (res.body) {
       res.body.forEach((candidat: ICandidat) => {
         candidat.datenais = candidat.datenais ? moment(candidat.datenais) : undefined;
-        candidat.dateCreation = candidat.dateCreation ? moment(candidat.dateCreation) : undefined;
-        candidat.dateModification = candidat.dateModification ? moment(candidat.dateModification) : undefined;
       });
     }
     return res;

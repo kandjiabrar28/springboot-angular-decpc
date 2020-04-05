@@ -7,12 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IExamen, Examen } from 'app/shared/model/examen.model';
 import { ExamenService } from './examen.service';
-import { ITour } from 'app/shared/model/tour.model';
-import { TourService } from 'app/entities/tour/tour.service';
-import { IJury } from 'app/shared/model/jury.model';
-import { JuryService } from 'app/entities/jury/jury.service';
-
-type SelectableEntity = ITour | IJury;
 
 @Component({
   selector: 'jhi-examen-update',
@@ -20,35 +14,19 @@ type SelectableEntity = ITour | IJury;
 })
 export class ExamenUpdateComponent implements OnInit {
   isSaving = false;
-  tours: ITour[] = [];
-  juries: IJury[] = [];
-  dateCreationDp: any;
-  dateModificationDp: any;
+  dateExamenDp: any;
 
   editForm = this.fb.group({
     id: [],
     nomexamen: [],
-    dateCreation: [],
-    dateModification: [],
-    tour: [],
-    juries: []
+    dateExamen: []
   });
 
-  constructor(
-    protected examenService: ExamenService,
-    protected tourService: TourService,
-    protected juryService: JuryService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected examenService: ExamenService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ examen }) => {
       this.updateForm(examen);
-
-      this.tourService.query().subscribe((res: HttpResponse<ITour[]>) => (this.tours = res.body || []));
-
-      this.juryService.query().subscribe((res: HttpResponse<IJury[]>) => (this.juries = res.body || []));
     });
   }
 
@@ -56,10 +34,7 @@ export class ExamenUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: examen.id,
       nomexamen: examen.nomexamen,
-      dateCreation: examen.dateCreation,
-      dateModification: examen.dateModification,
-      tour: examen.tour,
-      juries: examen.juries
+      dateExamen: examen.dateExamen
     });
   }
 
@@ -82,10 +57,7 @@ export class ExamenUpdateComponent implements OnInit {
       ...new Examen(),
       id: this.editForm.get(['id'])!.value,
       nomexamen: this.editForm.get(['nomexamen'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value,
-      tour: this.editForm.get(['tour'])!.value,
-      juries: this.editForm.get(['juries'])!.value
+      dateExamen: this.editForm.get(['dateExamen'])!.value
     };
   }
 
@@ -103,20 +75,5 @@ export class ExamenUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: IJury[], option: IJury): IJury {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
   }
 }

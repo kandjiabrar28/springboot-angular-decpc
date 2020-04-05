@@ -19,16 +19,10 @@
             <column name="numtour" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="date_creation" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_modification" type="date">
-                <constraints nullable="true" />
-            </column>
             <column name="matiere_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="t_anonym_id" type="bigint">
+            <column name="examen_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -55,8 +49,6 @@
                   tableName="tour">
             <column name="id" type="numeric"/>
             <column name="numtour" type="numeric"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

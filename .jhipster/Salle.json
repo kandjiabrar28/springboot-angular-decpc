@@ -8,37 +8,20 @@
         {
             "fieldName": "nomsalle",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "otherEntityName": "tables",
+            "otherEntityName": "table",
             "otherEntityRelationshipName": "salle",
-            "relationshipName": "tables"
+            "relationshipName": "table"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "pVSurveillance",
             "otherEntityRelationshipName": "salle",
-            "relationshipName": "pvsurveillance",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "surveillant",
-            "otherEntityRelationshipName": "salle",
-            "relationshipName": "surveillant",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "relationshipName": "pvsurveillance"
         },
         {
             "relationshipType": "many-to-one",

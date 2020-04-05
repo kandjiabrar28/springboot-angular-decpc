@@ -22,15 +22,6 @@
             <column name="nomsalle" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_creation" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_modification" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="pvsurveillance_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="centre_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -40,17 +31,6 @@
 
     <changeSet id="20200404193600-1-relations" author="jhipster">
 
-        <createTable tableName="salle_surveillant">
-            <column name="surveillant_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="salle_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="salle_id, surveillant_id" tableName="salle_surveillant"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
@@ -70,8 +50,6 @@
             <column name="id" type="numeric"/>
             <column name="numsalle" type="numeric"/>
             <column name="nomsalle" type="string"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

@@ -1,0 +1,38 @@
+{
+    "name": "Session",
+    "fields": [
+        {
+            "fieldName": "dateSession",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "examen",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "examen",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "specialite",
+            "otherEntityRelationshipName": "session",
+            "relationshipName": "specialite",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200405150600",
+    "entityTableName": "session",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

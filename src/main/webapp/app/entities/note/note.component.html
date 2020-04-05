@@ -24,9 +24,8 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.note.note">Note</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.note.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.note.dateModification">Date Modification</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.note.matiere">Matiere</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.note.correcteur">Correcteur</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.note.candidat">Candidat</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -35,11 +34,14 @@
                 <tr *ngFor="let note of notes ;trackBy: trackId">
                     <td><a [routerLink]="['/note', note.id, 'view']">{{ note.id }}</a></td>
                     <td>{{ note.note }}</td>
-                    <td>{{ note.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ note.dateModification | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="note.matiere">
                             <a [routerLink]="['/matiere', note.matiere?.id, 'view']" >{{ note.matiere?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="note.correcteur">
+                            <a [routerLink]="['/correcteur', note.correcteur?.id, 'view']" >{{ note.correcteur?.id }}</a>
                         </div>
                     </td>
                     <td>

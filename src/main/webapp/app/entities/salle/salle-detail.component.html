@@ -16,26 +16,6 @@
                 <dd>
                     <span>{{ salle.nomsalle }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.salle.dateCreation">Date Creation</span></dt>
-                <dd>
-                    <span>{{ salle.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.salle.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ salle.dateModification }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.salle.pvsurveillance">Pvsurveillance</span></dt>
-                <dd>
-                    <div *ngIf="salle.pvsurveillance">
-                        <a [routerLink]="['/pv-surveillance', salle.pvsurveillance?.id, 'view']">{{ salle.pvsurveillance?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.salle.surveillant">Surveillant</span></dt>
-                <dd>
-                    <span *ngFor="let surveillant of salle.surveillants; let last = last">
-                        <a [routerLink]="['/surveillant', surveillant?.id, 'view']">{{ surveillant.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
                 <dt><span jhiTranslate="jhipsterApp.salle.centre">Centre</span></dt>
                 <dd>
                     <div *ngIf="salle.centre">

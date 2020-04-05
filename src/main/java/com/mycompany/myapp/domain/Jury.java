@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,7 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,17 +25,13 @@ public class Jury implements Serializable {
     private Long id;
 
     @Column(name = "numjury")
-    private String numjury;
+    private Integer numjury;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
-
-    @ManyToMany(mappedBy = "juries")
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
+    @JoinTable(name = "jury_examen",
+               joinColumns = @JoinColumn(name = "jury_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "examen_id", referencedColumnName = "id"))
     private Set<Examen> examen = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -49,43 +43,17 @@ public class Jury implements Serializable {
         this.id = id;
     }
 
-    public String getNumjury() {
+    public Integer getNumjury() {
         return numjury;
     }
 
-    public Jury numjury(String numjury) {
+    public Jury numjury(Integer numjury) {
         this.numjury = numjury;
         return this;
     }
 
-    public void setNumjury(String numjury) {
+    public void setNumjury(Integer numjury) {
         this.numjury = numjury;
-    }
-
-    public LocalDate getDateCreation() {
-        return dateCreation;
-    }
-
-    public Jury dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-        return this;
-    }
-
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Jury dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-        return this;
-    }
-
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
     }
 
     public Set<Examen> getExamen() {
@@ -134,9 +102,7 @@ public class Jury implements Serializable {
     public String toString() {
         return "Jury{" +
             "id=" + getId() +
-            ", numjury='" + getNumjury() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
+            ", numjury=" + getNumjury() +
             "}";
     }
 }

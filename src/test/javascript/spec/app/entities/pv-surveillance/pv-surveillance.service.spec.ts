@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new PVSurveillance(0, 'AAAAAAA', currentDate, currentDate, currentDate, currentDate, currentDate);
+      elemDefault = new PVSurveillance(0, 'AAAAAAA', currentDate, currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -33,9 +33,7 @@ describe('Service Tests', () => {
           {
             heureDeb: currentDate.format(DATE_TIME_FORMAT),
             heureFin: currentDate.format(DATE_TIME_FORMAT),
-            datesurv: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datesurv: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -53,9 +51,7 @@ describe('Service Tests', () => {
             id: 0,
             heureDeb: currentDate.format(DATE_TIME_FORMAT),
             heureFin: currentDate.format(DATE_TIME_FORMAT),
-            datesurv: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datesurv: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -64,9 +60,7 @@ describe('Service Tests', () => {
           {
             heureDeb: currentDate,
             heureFin: currentDate,
-            datesurv: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
+            datesurv: currentDate
           },
           returnedFromService
         );
@@ -84,9 +78,7 @@ describe('Service Tests', () => {
             epreuve: 'BBBBBB',
             heureDeb: currentDate.format(DATE_TIME_FORMAT),
             heureFin: currentDate.format(DATE_TIME_FORMAT),
-            datesurv: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datesurv: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -95,9 +87,7 @@ describe('Service Tests', () => {
           {
             heureDeb: currentDate,
             heureFin: currentDate,
-            datesurv: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
+            datesurv: currentDate
           },
           returnedFromService
         );
@@ -115,9 +105,7 @@ describe('Service Tests', () => {
             epreuve: 'BBBBBB',
             heureDeb: currentDate.format(DATE_TIME_FORMAT),
             heureFin: currentDate.format(DATE_TIME_FORMAT),
-            datesurv: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datesurv: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -126,9 +114,7 @@ describe('Service Tests', () => {
           {
             heureDeb: currentDate,
             heureFin: currentDate,
-            datesurv: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
+            datesurv: currentDate
           },
           returnedFromService
         );

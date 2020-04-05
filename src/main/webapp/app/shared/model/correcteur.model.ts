@@ -1,4 +1,5 @@
-import { Moment } from 'moment';
+import { IPlageCopie } from 'app/shared/model/plage-copie.model';
+import { INote } from 'app/shared/model/note.model';
 import { IMatiere } from 'app/shared/model/matiere.model';
 
 export interface ICorrecteur {
@@ -10,9 +11,8 @@ export interface ICorrecteur {
   cni?: string;
   telephone?: string;
   sexe?: string;
-  datenais?: Moment;
-  dateCreation?: Moment;
-  dateModification?: Moment;
+  plagecopies?: IPlageCopie[];
+  notes?: INote[];
   matieres?: IMatiere[];
 }
 
@@ -26,9 +26,8 @@ export class Correcteur implements ICorrecteur {
     public cni?: string,
     public telephone?: string,
     public sexe?: string,
-    public datenais?: Moment,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
+    public plagecopies?: IPlageCopie[],
+    public notes?: INote[],
     public matieres?: IMatiere[]
   ) {}
 }

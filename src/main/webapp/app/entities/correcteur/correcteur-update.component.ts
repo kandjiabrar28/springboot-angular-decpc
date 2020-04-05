@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { ICorrecteur, Correcteur } from 'app/shared/model/correcteur.model';
 import { CorrecteurService } from './correcteur.service';
+import { IMatiere } from 'app/shared/model/matiere.model';
+import { MatiereService } from 'app/entities/matiere/matiere.service';
 
 @Component({
   selector: 'jhi-correcteur-update',
@@ -14,9 +16,7 @@ import { CorrecteurService } from './correcteur.service';
 })
 export class CorrecteurUpdateComponent implements OnInit {
   isSaving = false;
-  datenaisDp: any;
-  dateCreationDp: any;
-  dateModificationDp: any;
+  matieres: IMatiere[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -27,16 +27,21 @@ export class CorrecteurUpdateComponent implements OnInit {
     cni: [],
     telephone: [],
     sexe: [],
-    datenais: [],
-    dateCreation: [],
-    dateModification: []
+    matieres: []
   });
 
-  constructor(protected correcteurService: CorrecteurService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected correcteurService: CorrecteurService,
+    protected matiereService: MatiereService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ correcteur }) => {
       this.updateForm(correcteur);
+
+      this.matiereService.query().subscribe((res: HttpResponse<IMatiere[]>) => (this.matieres = res.body || []));
     });
   }
 
@@ -50,9 +55,7 @@ export class CorrecteurUpdateComponent implements OnInit {
       cni: correcteur.cni,
       telephone: correcteur.telephone,
       sexe: correcteur.sexe,
-      datenais: correcteur.datenais,
-      dateCreation: correcteur.dateCreation,
-      dateModification: correcteur.dateModification
+      matieres: correcteur.matieres
     });
   }
 
@@ -81,9 +84,7 @@ export class CorrecteurUpdateComponent implements OnInit {
       cni: this.editForm.get(['cni'])!.value,
       telephone: this.editForm.get(['telephone'])!.value,
       sexe: this.editForm.get(['sexe'])!.value,
-      datenais: this.editForm.get(['datenais'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value
+      matieres: this.editForm.get(['matieres'])!.value
     };
   }
 
@@ -101,5 +102,20 @@ export class CorrecteurUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IMatiere): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: IMatiere[], option: IMatiere): IMatiere {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

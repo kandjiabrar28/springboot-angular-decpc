@@ -24,15 +24,14 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Examen(0, 'AAAAAAA', currentDate, currentDate);
+      elemDefault = new Examen(0, 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            dateExamen: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -48,16 +47,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            dateExamen: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            dateCreation: currentDate,
-            dateModification: currentDate
+            dateExamen: currentDate
           },
           returnedFromService
         );
@@ -73,16 +70,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             nomexamen: 'BBBBBB',
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            dateExamen: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            dateCreation: currentDate,
-            dateModification: currentDate
+            dateExamen: currentDate
           },
           returnedFromService
         );
@@ -98,16 +93,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             nomexamen: 'BBBBBB',
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            dateExamen: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            dateCreation: currentDate,
-            dateModification: currentDate
+            dateExamen: currentDate
           },
           returnedFromService
         );

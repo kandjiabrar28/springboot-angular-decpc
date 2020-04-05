@@ -3,15 +3,7 @@
     "fields": [
         {
             "fieldName": "note",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
+            "fieldType": "Double"
         }
     ],
     "relationships": [
@@ -20,6 +12,13 @@
             "otherEntityName": "matiere",
             "otherEntityRelationshipName": "note",
             "relationshipName": "matiere",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "correcteur",
+            "otherEntityRelationshipName": "note",
+            "relationshipName": "correcteur",
             "otherEntityField": "id"
         },
         {

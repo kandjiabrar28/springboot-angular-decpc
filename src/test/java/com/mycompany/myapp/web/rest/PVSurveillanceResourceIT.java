@@ -48,12 +48,6 @@ public class PVSurveillanceResourceIT {
     private static final LocalDate DEFAULT_DATESURV = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATESURV = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
-
     @Autowired
     private PVSurveillanceRepository pVSurveillanceRepository;
 
@@ -76,9 +70,7 @@ public class PVSurveillanceResourceIT {
             .epreuve(DEFAULT_EPREUVE)
             .heureDeb(DEFAULT_HEURE_DEB)
             .heureFin(DEFAULT_HEURE_FIN)
-            .datesurv(DEFAULT_DATESURV)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .datesurv(DEFAULT_DATESURV);
         return pVSurveillance;
     }
     /**
@@ -92,9 +84,7 @@ public class PVSurveillanceResourceIT {
             .epreuve(UPDATED_EPREUVE)
             .heureDeb(UPDATED_HEURE_DEB)
             .heureFin(UPDATED_HEURE_FIN)
-            .datesurv(UPDATED_DATESURV)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .datesurv(UPDATED_DATESURV);
         return pVSurveillance;
     }
 
@@ -122,8 +112,6 @@ public class PVSurveillanceResourceIT {
         assertThat(testPVSurveillance.getHeureDeb()).isEqualTo(DEFAULT_HEURE_DEB);
         assertThat(testPVSurveillance.getHeureFin()).isEqualTo(DEFAULT_HEURE_FIN);
         assertThat(testPVSurveillance.getDatesurv()).isEqualTo(DEFAULT_DATESURV);
-        assertThat(testPVSurveillance.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testPVSurveillance.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -160,9 +148,7 @@ public class PVSurveillanceResourceIT {
             .andExpect(jsonPath("$.[*].epreuve").value(hasItem(DEFAULT_EPREUVE)))
             .andExpect(jsonPath("$.[*].heureDeb").value(hasItem(sameInstant(DEFAULT_HEURE_DEB))))
             .andExpect(jsonPath("$.[*].heureFin").value(hasItem(sameInstant(DEFAULT_HEURE_FIN))))
-            .andExpect(jsonPath("$.[*].datesurv").value(hasItem(DEFAULT_DATESURV.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].datesurv").value(hasItem(DEFAULT_DATESURV.toString())));
     }
     
     @Test
@@ -179,9 +165,7 @@ public class PVSurveillanceResourceIT {
             .andExpect(jsonPath("$.epreuve").value(DEFAULT_EPREUVE))
             .andExpect(jsonPath("$.heureDeb").value(sameInstant(DEFAULT_HEURE_DEB)))
             .andExpect(jsonPath("$.heureFin").value(sameInstant(DEFAULT_HEURE_FIN)))
-            .andExpect(jsonPath("$.datesurv").value(DEFAULT_DATESURV.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.datesurv").value(DEFAULT_DATESURV.toString()));
     }
 
     @Test
@@ -208,9 +192,7 @@ public class PVSurveillanceResourceIT {
             .epreuve(UPDATED_EPREUVE)
             .heureDeb(UPDATED_HEURE_DEB)
             .heureFin(UPDATED_HEURE_FIN)
-            .datesurv(UPDATED_DATESURV)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .datesurv(UPDATED_DATESURV);
 
         restPVSurveillanceMockMvc.perform(put("/api/pv-surveillances")
             .contentType(MediaType.APPLICATION_JSON)
@@ -225,8 +207,6 @@ public class PVSurveillanceResourceIT {
         assertThat(testPVSurveillance.getHeureDeb()).isEqualTo(UPDATED_HEURE_DEB);
         assertThat(testPVSurveillance.getHeureFin()).isEqualTo(UPDATED_HEURE_FIN);
         assertThat(testPVSurveillance.getDatesurv()).isEqualTo(UPDATED_DATESURV);
-        assertThat(testPVSurveillance.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testPVSurveillance.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

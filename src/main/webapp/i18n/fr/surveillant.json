@@ -24,10 +24,7 @@
       "telephone": "Telephone",
       "sexe": "Sexe",
       "datenais": "Datenais",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
-      "pvsurveillance": "Pvsurveillance",
-      "salle": "Salle"
+      "pvsurveillance": "Pvsurveillance"
     }
   }
 }

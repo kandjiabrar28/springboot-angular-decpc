@@ -6,20 +6,25 @@ import com.mycompany.myapp.repository.JuryRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -27,22 +32,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link JuryResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class JuryResourceIT {
 
-    private static final String DEFAULT_NUMJURY = "AAAAAAAAAA";
-    private static final String UPDATED_NUMJURY = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
+    private static final Integer DEFAULT_NUMJURY = 1;
+    private static final Integer UPDATED_NUMJURY = 2;
 
     @Autowired
     private JuryRepository juryRepository;
+
+    @Mock
+    private JuryRepository juryRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -60,9 +62,7 @@ public class JuryResourceIT {
      */
     public static Jury createEntity(EntityManager em) {
         Jury jury = new Jury()
-            .numjury(DEFAULT_NUMJURY)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .numjury(DEFAULT_NUMJURY);
         return jury;
     }
     /**
@@ -73,9 +73,7 @@ public class JuryResourceIT {
      */
     public static Jury createUpdatedEntity(EntityManager em) {
         Jury jury = new Jury()
-            .numjury(UPDATED_NUMJURY)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .numjury(UPDATED_NUMJURY);
         return jury;
     }
 
@@ -100,8 +98,6 @@ public class JuryResourceIT {
         assertThat(juryList).hasSize(databaseSizeBeforeCreate + 1);
         Jury testJury = juryList.get(juryList.size() - 1);
         assertThat(testJury.getNumjury()).isEqualTo(DEFAULT_NUMJURY);
-        assertThat(testJury.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testJury.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -135,11 +131,31 @@ public class JuryResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(jury.getId().intValue())))
-            .andExpect(jsonPath("$.[*].numjury").value(hasItem(DEFAULT_NUMJURY)))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].numjury").value(hasItem(DEFAULT_NUMJURY)));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllJuriesWithEagerRelationshipsIsEnabled() throws Exception {
+        JuryResource juryResource = new JuryResource(juryRepositoryMock);
+        when(juryRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restJuryMockMvc.perform(get("/api/juries?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(juryRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllJuriesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        JuryResource juryResource = new JuryResource(juryRepositoryMock);
+        when(juryRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restJuryMockMvc.perform(get("/api/juries?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(juryRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getJury() throws Exception {
@@ -151,9 +167,7 @@ public class JuryResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(jury.getId().intValue()))
-            .andExpect(jsonPath("$.numjury").value(DEFAULT_NUMJURY))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.numjury").value(DEFAULT_NUMJURY));
     }
 
     @Test
@@ -177,9 +191,7 @@ public class JuryResourceIT {
         // Disconnect from session so that the updates on updatedJury are not directly saved in db
         em.detach(updatedJury);
         updatedJury
-            .numjury(UPDATED_NUMJURY)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .numjury(UPDATED_NUMJURY);
 
         restJuryMockMvc.perform(put("/api/juries")
             .contentType(MediaType.APPLICATION_JSON)
@@ -191,8 +203,6 @@ public class JuryResourceIT {
         assertThat(juryList).hasSize(databaseSizeBeforeUpdate);
         Jury testJury = juryList.get(juryList.size() - 1);
         assertThat(testJury.getNumjury()).isEqualTo(UPDATED_NUMJURY);
-        assertThat(testJury.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testJury.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

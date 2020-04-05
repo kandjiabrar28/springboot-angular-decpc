@@ -24,10 +24,9 @@
       "sexe": "Sexe",
       "datenais": "Datenais",
       "niveau": "Niveau",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
-      "tanonym": "Tanonym",
-      "note": "Note"
+      "table": "Table",
+      "note": "Note",
+      "anonymat": "Anonymat"
     }
   }
 }

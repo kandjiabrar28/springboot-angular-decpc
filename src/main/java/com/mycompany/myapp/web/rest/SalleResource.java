@@ -82,13 +82,12 @@ public class SalleResource {
     /**
      * {@code GET  /salles} : get all the salles.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of salles in body.
      */
     @GetMapping("/salles")
-    public List<Salle> getAllSalles(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Salle> getAllSalles() {
         log.debug("REST request to get all Salles");
-        return salleRepository.findAllWithEagerRelationships();
+        return salleRepository.findAll();
     }
 
     /**
@@ -100,7 +99,7 @@ public class SalleResource {
     @GetMapping("/salles/{id}")
     public ResponseEntity<Salle> getSalle(@PathVariable Long id) {
         log.debug("REST request to get Salle : {}", id);
-        Optional<Salle> salle = salleRepository.findOneWithEagerRelationships(id);
+        Optional<Salle> salle = salleRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(salle);
     }
 

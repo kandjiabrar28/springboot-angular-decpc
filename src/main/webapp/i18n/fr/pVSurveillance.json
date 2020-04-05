@@ -20,8 +20,8 @@
       "heureDeb": "Heure Deb",
       "heureFin": "Heure Fin",
       "datesurv": "Datesurv",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification"
+      "salle": "Salle",
+      "surveillant": "Surveillant"
     }
   }
 }

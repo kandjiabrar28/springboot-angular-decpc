@@ -1,6 +1,6 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,21 +29,20 @@ public class Examen implements Serializable {
     @Column(name = "nomexamen")
     private String nomexamen;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
+    @Column(name = "date_examen")
+    private LocalDate dateExamen;
 
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
-
-    @ManyToOne
-    @JsonIgnoreProperties("examen")
-    private Tour tour;
-
-    @ManyToMany
+    @OneToMany(mappedBy = "examen")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "examen_jury",
-               joinColumns = @JoinColumn(name = "examen_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "jury_id", referencedColumnName = "id"))
+    private Set<Session> sessions = new HashSet<>();
+
+    @OneToMany(mappedBy = "examen")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Tour> tours = new HashSet<>();
+
+    @ManyToMany(mappedBy = "examen")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<Jury> juries = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -68,43 +67,67 @@ public class Examen implements Serializable {
         this.nomexamen = nomexamen;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
+    public LocalDate getDateExamen() {
+        return dateExamen;
     }
 
-    public Examen dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public Examen dateExamen(LocalDate dateExamen) {
+        this.dateExamen = dateExamen;
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public void setDateExamen(LocalDate dateExamen) {
+        this.dateExamen = dateExamen;
     }
 
-    public LocalDate getDateModification() {
-        return dateModification;
+    public Set<Session> getSessions() {
+        return sessions;
     }
 
-    public Examen dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Examen sessions(Set<Session> sessions) {
+        this.sessions = sessions;
         return this;
     }
 
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-    }
-
-    public Tour getTour() {
-        return tour;
-    }
-
-    public Examen tour(Tour tour) {
-        this.tour = tour;
+    public Examen addSession(Session session) {
+        this.sessions.add(session);
+        session.setExamen(this);
         return this;
     }
 
-    public void setTour(Tour tour) {
-        this.tour = tour;
+    public Examen removeSession(Session session) {
+        this.sessions.remove(session);
+        session.setExamen(null);
+        return this;
+    }
+
+    public void setSessions(Set<Session> sessions) {
+        this.sessions = sessions;
+    }
+
+    public Set<Tour> getTours() {
+        return tours;
+    }
+
+    public Examen tours(Set<Tour> tours) {
+        this.tours = tours;
+        return this;
+    }
+
+    public Examen addTour(Tour tour) {
+        this.tours.add(tour);
+        tour.setExamen(this);
+        return this;
+    }
+
+    public Examen removeTour(Tour tour) {
+        this.tours.remove(tour);
+        tour.setExamen(null);
+        return this;
+    }
+
+    public void setTours(Set<Tour> tours) {
+        this.tours = tours;
     }
 
     public Set<Jury> getJuries() {
@@ -154,8 +177,7 @@ public class Examen implements Serializable {
         return "Examen{" +
             "id=" + getId() +
             ", nomexamen='" + getNomexamen() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
+            ", dateExamen='" + getDateExamen() + "'" +
             "}";
     }
 }

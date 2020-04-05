@@ -56,12 +56,6 @@ public class CandidatResourceIT {
     private static final String DEFAULT_NIVEAU = "AAAAAAAAAA";
     private static final String UPDATED_NIVEAU = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
-
     @Autowired
     private CandidatRepository candidatRepository;
 
@@ -88,9 +82,7 @@ public class CandidatResourceIT {
             .telephone(DEFAULT_TELEPHONE)
             .sexe(DEFAULT_SEXE)
             .datenais(DEFAULT_DATENAIS)
-            .niveau(DEFAULT_NIVEAU)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .niveau(DEFAULT_NIVEAU);
         return candidat;
     }
     /**
@@ -108,9 +100,7 @@ public class CandidatResourceIT {
             .telephone(UPDATED_TELEPHONE)
             .sexe(UPDATED_SEXE)
             .datenais(UPDATED_DATENAIS)
-            .niveau(UPDATED_NIVEAU)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .niveau(UPDATED_NIVEAU);
         return candidat;
     }
 
@@ -142,8 +132,6 @@ public class CandidatResourceIT {
         assertThat(testCandidat.getSexe()).isEqualTo(DEFAULT_SEXE);
         assertThat(testCandidat.getDatenais()).isEqualTo(DEFAULT_DATENAIS);
         assertThat(testCandidat.getNiveau()).isEqualTo(DEFAULT_NIVEAU);
-        assertThat(testCandidat.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testCandidat.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -184,9 +172,7 @@ public class CandidatResourceIT {
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)))
             .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE)))
             .andExpect(jsonPath("$.[*].datenais").value(hasItem(DEFAULT_DATENAIS.toString())))
-            .andExpect(jsonPath("$.[*].niveau").value(hasItem(DEFAULT_NIVEAU)))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].niveau").value(hasItem(DEFAULT_NIVEAU)));
     }
     
     @Test
@@ -207,9 +193,7 @@ public class CandidatResourceIT {
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE))
             .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE))
             .andExpect(jsonPath("$.datenais").value(DEFAULT_DATENAIS.toString()))
-            .andExpect(jsonPath("$.niveau").value(DEFAULT_NIVEAU))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.niveau").value(DEFAULT_NIVEAU));
     }
 
     @Test
@@ -240,9 +224,7 @@ public class CandidatResourceIT {
             .telephone(UPDATED_TELEPHONE)
             .sexe(UPDATED_SEXE)
             .datenais(UPDATED_DATENAIS)
-            .niveau(UPDATED_NIVEAU)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .niveau(UPDATED_NIVEAU);
 
         restCandidatMockMvc.perform(put("/api/candidats")
             .contentType(MediaType.APPLICATION_JSON)
@@ -261,8 +243,6 @@ public class CandidatResourceIT {
         assertThat(testCandidat.getSexe()).isEqualTo(UPDATED_SEXE);
         assertThat(testCandidat.getDatenais()).isEqualTo(UPDATED_DATENAIS);
         assertThat(testCandidat.getNiveau()).isEqualTo(UPDATED_NIVEAU);
-        assertThat(testCandidat.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testCandidat.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

@@ -12,25 +12,9 @@
                 <dd>
                     <span>{{ examen.nomexamen }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.examen.dateCreation">Date Creation</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.examen.dateExamen">Date Examen</span></dt>
                 <dd>
-                    <span>{{ examen.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.examen.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ examen.dateModification }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.examen.tour">Tour</span></dt>
-                <dd>
-                    <div *ngIf="examen.tour">
-                        <a [routerLink]="['/tour', examen.tour?.id, 'view']">{{ examen.tour?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.examen.jury">Jury</span></dt>
-                <dd>
-                    <span *ngFor="let jury of examen.juries; let last = last">
-                        <a [routerLink]="['/jury', jury?.id, 'view']">{{ jury.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
+                    <span>{{ examen.dateExamen }}</span>
                 </dd>
             </dl>
 

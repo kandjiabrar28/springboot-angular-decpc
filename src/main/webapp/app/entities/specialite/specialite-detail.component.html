@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="specialite">
+            <h2><span jhiTranslate="jhipsterApp.specialite.detail.title">Specialite</span> {{ specialite.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.specialite.libspec">Libspec</span></dt>
+                <dd>
+                    <span>{{ specialite.libspec }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.specialite.niveau">Niveau</span></dt>
+                <dd>
+                    <span *ngFor="let niveau of specialite.niveaus; let last = last">
+                        <a [routerLink]="['/niveau', niveau?.id, 'view']">{{ niveau.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.specialite.filiere">Filiere</span></dt>
+                <dd>
+                    <div *ngIf="specialite.filiere">
+                        <a [routerLink]="['/filiere', specialite.filiere?.id, 'view']">{{ specialite.filiere?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/specialite', specialite.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

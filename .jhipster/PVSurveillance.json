@@ -16,17 +16,24 @@
         {
             "fieldName": "datesurv",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "salle",
+            "otherEntityRelationshipName": "pvsurveillance",
+            "relationshipName": "salle",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "surveillant",
+            "otherEntityRelationshipName": "pvsurveillance",
+            "relationshipName": "surveillant",
+            "otherEntityField": "id"
+        }
+    ],
     "changelogDate": "20200404193500",
     "entityTableName": "pv_surveillance",
     "dto": "no",

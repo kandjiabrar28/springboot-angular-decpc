@@ -1,7 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -51,20 +49,9 @@ public class Surveillant implements Serializable {
     @Column(name = "datenais")
     private LocalDate datenais;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
-
-    @ManyToOne
-    @JsonIgnoreProperties("surveillants")
-    private PVSurveillance pvsurveillance;
-
-    @ManyToMany(mappedBy = "surveillants")
+    @OneToMany(mappedBy = "surveillant")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<Salle> salles = new HashSet<>();
+    private Set<PVSurveillance> pvsurveillances = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -179,68 +166,29 @@ public class Surveillant implements Serializable {
         this.datenais = datenais;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
+    public Set<PVSurveillance> getPvsurveillances() {
+        return pvsurveillances;
     }
 
-    public Surveillant dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public Surveillant pvsurveillances(Set<PVSurveillance> pVSurveillances) {
+        this.pvsurveillances = pVSurveillances;
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Surveillant dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Surveillant addPvsurveillance(PVSurveillance pVSurveillance) {
+        this.pvsurveillances.add(pVSurveillance);
+        pVSurveillance.setSurveillant(this);
         return this;
     }
 
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-    }
-
-    public PVSurveillance getPvsurveillance() {
-        return pvsurveillance;
-    }
-
-    public Surveillant pvsurveillance(PVSurveillance pVSurveillance) {
-        this.pvsurveillance = pVSurveillance;
+    public Surveillant removePvsurveillance(PVSurveillance pVSurveillance) {
+        this.pvsurveillances.remove(pVSurveillance);
+        pVSurveillance.setSurveillant(null);
         return this;
     }
 
-    public void setPvsurveillance(PVSurveillance pVSurveillance) {
-        this.pvsurveillance = pVSurveillance;
-    }
-
-    public Set<Salle> getSalles() {
-        return salles;
-    }
-
-    public Surveillant salles(Set<Salle> salles) {
-        this.salles = salles;
-        return this;
-    }
-
-    public Surveillant addSalle(Salle salle) {
-        this.salles.add(salle);
-        salle.getSurveillants().add(this);
-        return this;
-    }
-
-    public Surveillant removeSalle(Salle salle) {
-        this.salles.remove(salle);
-        salle.getSurveillants().remove(this);
-        return this;
-    }
-
-    public void setSalles(Set<Salle> salles) {
-        this.salles = salles;
+    public void setPvsurveillances(Set<PVSurveillance> pVSurveillances) {
+        this.pvsurveillances = pVSurveillances;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -272,8 +220,6 @@ public class Surveillant implements Serializable {
             ", telephone='" + getTelephone() + "'" +
             ", sexe='" + getSexe() + "'" +
             ", datenais='" + getDatenais() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

@@ -28,10 +28,10 @@
             <column name="datesurv" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="date_creation" type="date">
+            <column name="salle_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="date_modification" type="date">
+            <column name="surveillant_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -63,8 +63,6 @@
             <column name="heure_deb" type="datetime"/>
             <column name="heure_fin" type="datetime"/>
             <column name="datesurv" type="date"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

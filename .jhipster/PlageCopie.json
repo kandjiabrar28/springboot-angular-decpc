@@ -1,0 +1,39 @@
+{
+    "name": "PlageCopie",
+    "fields": [
+        {
+            "fieldName": "plage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "typecopie",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombrecopie",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "correcteur",
+            "otherEntityRelationshipName": "plagecopie",
+            "relationshipName": "correcteur",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200405151600",
+    "entityTableName": "plage_copie",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

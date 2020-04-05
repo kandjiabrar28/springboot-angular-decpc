@@ -24,28 +24,14 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Surveillant(
-        0,
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        currentDate,
-        currentDate,
-        currentDate
-      );
+      elemDefault = new Surveillant(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datenais: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -61,18 +47,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datenais: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            datenais: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
+            datenais: currentDate
           },
           returnedFromService
         );
@@ -94,18 +76,14 @@ describe('Service Tests', () => {
             cni: 'BBBBBB',
             telephone: 'BBBBBB',
             sexe: 'BBBBBB',
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datenais: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            datenais: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
+            datenais: currentDate
           },
           returnedFromService
         );
@@ -127,18 +105,14 @@ describe('Service Tests', () => {
             cni: 'BBBBBB',
             telephone: 'BBBBBB',
             sexe: 'BBBBBB',
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            datenais: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            datenais: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
+            datenais: currentDate
           },
           returnedFromService
         );

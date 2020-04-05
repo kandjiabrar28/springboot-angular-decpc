@@ -24,10 +24,8 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.tour.numtour">Numtour</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.tour.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.tour.dateModification">Date Modification</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.tour.matiere">Matiere</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.tour.tAnonym">T Anonym</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.tour.examen">Examen</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,16 +33,14 @@
                 <tr *ngFor="let tour of tours ;trackBy: trackId">
                     <td><a [routerLink]="['/tour', tour.id, 'view']">{{ tour.id }}</a></td>
                     <td>{{ tour.numtour }}</td>
-                    <td>{{ tour.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ tour.dateModification | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="tour.matiere">
                             <a [routerLink]="['/matiere', tour.matiere?.id, 'view']" >{{ tour.matiere?.id }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="tour.tAnonym">
-                            <a [routerLink]="['/t-anonym', tour.tAnonym?.id, 'view']" >{{ tour.tAnonym?.id }}</a>
+                        <div *ngIf="tour.examen">
+                            <a [routerLink]="['/examen', tour.examen?.id, 'view']" >{{ tour.examen?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

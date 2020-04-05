@@ -14,11 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="matiere"/>
 
-        <addForeignKeyConstraint baseColumnNames="t_anonym_id"
+        <addForeignKeyConstraint baseColumnNames="examen_id"
                                  baseTableName="tour"
-                                 constraintName="fk_tour_t_anonym_id"
+                                 constraintName="fk_tour_examen_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="t_anonym"/>
+                                 referencedTableName="examen"/>
 
     </changeSet>
 </databaseChangeLog>

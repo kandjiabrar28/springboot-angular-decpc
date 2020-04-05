@@ -14,8 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,12 +32,6 @@ public class TourResourceIT {
 
     private static final Integer DEFAULT_NUMTOUR = 1;
     private static final Integer UPDATED_NUMTOUR = 2;
-
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private TourRepository tourRepository;
@@ -60,9 +52,7 @@ public class TourResourceIT {
      */
     public static Tour createEntity(EntityManager em) {
         Tour tour = new Tour()
-            .numtour(DEFAULT_NUMTOUR)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .numtour(DEFAULT_NUMTOUR);
         return tour;
     }
     /**
@@ -73,9 +63,7 @@ public class TourResourceIT {
      */
     public static Tour createUpdatedEntity(EntityManager em) {
         Tour tour = new Tour()
-            .numtour(UPDATED_NUMTOUR)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .numtour(UPDATED_NUMTOUR);
         return tour;
     }
 
@@ -100,8 +88,6 @@ public class TourResourceIT {
         assertThat(tourList).hasSize(databaseSizeBeforeCreate + 1);
         Tour testTour = tourList.get(tourList.size() - 1);
         assertThat(testTour.getNumtour()).isEqualTo(DEFAULT_NUMTOUR);
-        assertThat(testTour.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testTour.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -135,9 +121,7 @@ public class TourResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tour.getId().intValue())))
-            .andExpect(jsonPath("$.[*].numtour").value(hasItem(DEFAULT_NUMTOUR)))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].numtour").value(hasItem(DEFAULT_NUMTOUR)));
     }
     
     @Test
@@ -151,9 +135,7 @@ public class TourResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tour.getId().intValue()))
-            .andExpect(jsonPath("$.numtour").value(DEFAULT_NUMTOUR))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.numtour").value(DEFAULT_NUMTOUR));
     }
 
     @Test
@@ -177,9 +159,7 @@ public class TourResourceIT {
         // Disconnect from session so that the updates on updatedTour are not directly saved in db
         em.detach(updatedTour);
         updatedTour
-            .numtour(UPDATED_NUMTOUR)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .numtour(UPDATED_NUMTOUR);
 
         restTourMockMvc.perform(put("/api/tours")
             .contentType(MediaType.APPLICATION_JSON)
@@ -191,8 +171,6 @@ public class TourResourceIT {
         assertThat(tourList).hasSize(databaseSizeBeforeUpdate);
         Tour testTour = tourList.get(tourList.size() - 1);
         assertThat(testTour.getNumtour()).isEqualTo(UPDATED_NUMTOUR);
-        assertThat(testTour.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testTour.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

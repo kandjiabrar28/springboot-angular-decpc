@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
 
 /**
  * A Note.
@@ -25,17 +24,15 @@ public class Note implements Serializable {
     private Long id;
 
     @Column(name = "note")
-    private String note;
-
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
+    private Double note;
 
     @ManyToOne
     @JsonIgnoreProperties("notes")
     private Matiere matiere;
+
+    @ManyToOne
+    @JsonIgnoreProperties("notes")
+    private Correcteur correcteur;
 
     @ManyToOne
     @JsonIgnoreProperties("notes")
@@ -50,43 +47,17 @@ public class Note implements Serializable {
         this.id = id;
     }
 
-    public String getNote() {
+    public Double getNote() {
         return note;
     }
 
-    public Note note(String note) {
+    public Note note(Double note) {
         this.note = note;
         return this;
     }
 
-    public void setNote(String note) {
+    public void setNote(Double note) {
         this.note = note;
-    }
-
-    public LocalDate getDateCreation() {
-        return dateCreation;
-    }
-
-    public Note dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-        return this;
-    }
-
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Note dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-        return this;
-    }
-
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
     }
 
     public Matiere getMatiere() {
@@ -100,6 +71,19 @@ public class Note implements Serializable {
 
     public void setMatiere(Matiere matiere) {
         this.matiere = matiere;
+    }
+
+    public Correcteur getCorrecteur() {
+        return correcteur;
+    }
+
+    public Note correcteur(Correcteur correcteur) {
+        this.correcteur = correcteur;
+        return this;
+    }
+
+    public void setCorrecteur(Correcteur correcteur) {
+        this.correcteur = correcteur;
     }
 
     public Candidat getCandidat() {
@@ -136,9 +120,7 @@ public class Note implements Serializable {
     public String toString() {
         return "Note{" +
             "id=" + getId() +
-            ", note='" + getNote() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
+            ", note=" + getNote() +
             "}";
     }
 }

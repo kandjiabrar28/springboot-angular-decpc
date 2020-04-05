@@ -17,9 +17,8 @@
         "title": "Note"
       },
       "note": "Note",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
       "matiere": "Matiere",
+      "correcteur": "Correcteur",
       "candidat": "Candidat"
     }
   }

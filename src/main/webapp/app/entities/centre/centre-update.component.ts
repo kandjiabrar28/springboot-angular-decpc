@@ -14,8 +14,6 @@ import { CentreService } from './centre.service';
 })
 export class CentreUpdateComponent implements OnInit {
   isSaving = false;
-  dateCreationDp: any;
-  dateModificationDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -23,9 +21,7 @@ export class CentreUpdateComponent implements OnInit {
     region: [],
     departement: [],
     telephone: [],
-    email: [],
-    dateCreation: [],
-    dateModification: []
+    email: []
   });
 
   constructor(protected centreService: CentreService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -43,9 +39,7 @@ export class CentreUpdateComponent implements OnInit {
       region: centre.region,
       departement: centre.departement,
       telephone: centre.telephone,
-      email: centre.email,
-      dateCreation: centre.dateCreation,
-      dateModification: centre.dateModification
+      email: centre.email
     });
   }
 
@@ -71,9 +65,7 @@ export class CentreUpdateComponent implements OnInit {
       region: this.editForm.get(['region'])!.value,
       departement: this.editForm.get(['departement'])!.value,
       telephone: this.editForm.get(['telephone'])!.value,
-      email: this.editForm.get(['email'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value
+      email: this.editForm.get(['email'])!.value
     };
   }
 

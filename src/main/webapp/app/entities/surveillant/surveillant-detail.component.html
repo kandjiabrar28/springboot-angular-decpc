@@ -40,20 +40,6 @@
                 <dd>
                     <span>{{ surveillant.datenais }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.surveillant.dateCreation">Date Creation</span></dt>
-                <dd>
-                    <span>{{ surveillant.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.surveillant.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ surveillant.dateModification }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.surveillant.pvsurveillance">Pvsurveillance</span></dt>
-                <dd>
-                    <div *ngIf="surveillant.pvsurveillance">
-                        <a [routerLink]="['/pv-surveillance', surveillant.pvsurveillance?.id, 'view']">{{ surveillant.pvsurveillance?.id }}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

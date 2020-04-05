@@ -1,4 +1,5 @@
-import { Moment } from 'moment';
+import { INote } from 'app/shared/model/note.model';
+import { ITour } from 'app/shared/model/tour.model';
 import { ICorrecteur } from 'app/shared/model/correcteur.model';
 
 export interface IMatiere {
@@ -6,8 +7,8 @@ export interface IMatiere {
   libmatiere?: string;
   noteelimin?: number;
   coefficient?: number;
-  dateCreation?: Moment;
-  dateModification?: Moment;
+  notes?: INote[];
+  tours?: ITour[];
   correcteurs?: ICorrecteur[];
 }
 
@@ -17,8 +18,8 @@ export class Matiere implements IMatiere {
     public libmatiere?: string,
     public noteelimin?: number,
     public coefficient?: number,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
+    public notes?: INote[],
+    public tours?: ITour[],
     public correcteurs?: ICorrecteur[]
   ) {}
 }

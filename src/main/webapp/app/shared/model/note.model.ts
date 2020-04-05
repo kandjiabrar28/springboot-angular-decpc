@@ -1,23 +1,21 @@
-import { Moment } from 'moment';
 import { IMatiere } from 'app/shared/model/matiere.model';
+import { ICorrecteur } from 'app/shared/model/correcteur.model';
 import { ICandidat } from 'app/shared/model/candidat.model';
 
 export interface INote {
   id?: number;
-  note?: string;
-  dateCreation?: Moment;
-  dateModification?: Moment;
+  note?: number;
   matiere?: IMatiere;
+  correcteur?: ICorrecteur;
   candidat?: ICandidat;
 }
 
 export class Note implements INote {
   constructor(
     public id?: number,
-    public note?: string,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
+    public note?: number,
     public matiere?: IMatiere,
+    public correcteur?: ICorrecteur,
     public candidat?: ICandidat
   ) {}
 }

@@ -18,26 +18,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.tour.dateCreation" for="field_dateCreation">Date Creation</label>
-                    <div class="input-group">
-                        <input id="field_dateCreation" type="text" class="form-control" name="dateCreation" ngbDatepicker #dateCreationDp="ngbDatepicker" formControlName="dateCreation"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.tour.dateModification" for="field_dateModification">Date Modification</label>
-                    <div class="input-group">
-                        <input id="field_dateModification" type="text" class="form-control" name="dateModification" ngbDatepicker #dateModificationDp="ngbDatepicker" formControlName="dateModification"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateModificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterApp.tour.matiere" for="field_matiere">Matiere</label>
                     <select class="form-control" id="field_matiere" name="matiere" formControlName="matiere">
                         <option [ngValue]="null"></option>
@@ -46,10 +26,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.tour.tAnonym" for="field_tAnonym">T Anonym</label>
-                    <select class="form-control" id="field_tAnonym" name="tAnonym" formControlName="tAnonym">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.tour.examen" for="field_examen">Examen</label>
+                    <select class="form-control" id="field_examen" name="examen" formControlName="examen">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="tAnonymOption.id === editForm.get('tAnonym')!.value?.id ? editForm.get('tAnonym')!.value : tAnonymOption" *ngFor="let tAnonymOption of tanonyms; trackBy: trackById">{{ tAnonymOption.id }}</option>
+                        <option [ngValue]="examenOption.id === editForm.get('examen')!.value?.id ? editForm.get('examen')!.value : examenOption" *ngFor="let examenOption of examen; trackBy: trackById">{{ examenOption.id }}</option>
                     </select>
                 </div>
             </div>

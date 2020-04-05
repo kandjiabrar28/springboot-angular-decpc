@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="session">
+            <h2><span jhiTranslate="jhipsterApp.session.detail.title">Session</span> {{ session.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.session.dateSession">Date Session</span></dt>
+                <dd>
+                    <span>{{ session.dateSession }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.session.examen">Examen</span></dt>
+                <dd>
+                    <div *ngIf="session.examen">
+                        <a [routerLink]="['/examen', session.examen?.id, 'view']">{{ session.examen?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.session.specialite">Specialite</span></dt>
+                <dd>
+                    <div *ngIf="session.specialite">
+                        <a [routerLink]="['/specialite', session.specialite?.id, 'view']">{{ session.specialite?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/session', session.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
