@@ -17,10 +17,9 @@
         "title": "Tour"
       },
       "numtour": "Numtour",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
+      "anonymat": "Anonymat",
       "matiere": "Matiere",
-      "tAnonym": "T Anonym"
+      "examen": "Examen"
     }
   }
 }

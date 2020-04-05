@@ -16,16 +16,13 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="note" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_creation" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_modification" type="date">
+            <column name="note" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="matiere_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="correcteur_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="candidat_id" type="bigint">
@@ -54,9 +51,7 @@
                   separator=";"
                   tableName="note">
             <column name="id" type="numeric"/>
-            <column name="note" type="string"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
+            <column name="note" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

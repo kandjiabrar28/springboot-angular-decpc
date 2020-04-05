@@ -12,13 +12,11 @@
                 <dd>
                     <span>{{ jury.numjury }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.jury.dateCreation">Date Creation</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.jury.examen">Examen</span></dt>
                 <dd>
-                    <span>{{ jury.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.jury.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ jury.dateModification }}</span>
+                    <span *ngFor="let examen of jury.examen; let last = last">
+                        <a [routerLink]="['/examen', examen?.id, 'view']">{{ examen.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
                 </dd>
             </dl>
 

@@ -21,8 +21,6 @@
       "departement": "Departement",
       "telephone": "Telephone",
       "email": "Email",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
       "salle": "Salle"
     }
   }

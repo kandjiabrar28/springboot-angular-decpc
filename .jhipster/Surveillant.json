@@ -32,31 +32,14 @@
         {
             "fieldName": "datenais",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "pVSurveillance",
             "otherEntityRelationshipName": "surveillant",
-            "relationshipName": "pvsurveillance",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "salle",
-            "otherEntityRelationshipName": "surveillant",
-            "relationshipName": "salle",
-            "otherEntityField": "id",
-            "ownerSide": false
+            "relationshipName": "pvsurveillance"
         }
     ],
     "changelogDate": "20200404193700",

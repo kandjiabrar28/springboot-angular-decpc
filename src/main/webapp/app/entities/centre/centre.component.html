@@ -28,8 +28,6 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.centre.departement">Departement</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.centre.telephone">Telephone</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.centre.email">Email</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.centre.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.centre.dateModification">Date Modification</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -41,8 +39,6 @@
                     <td>{{ centre.departement }}</td>
                     <td>{{ centre.telephone }}</td>
                     <td>{{ centre.email }}</td>
-                    <td>{{ centre.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ centre.dateModification | date:'mediumDate' }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

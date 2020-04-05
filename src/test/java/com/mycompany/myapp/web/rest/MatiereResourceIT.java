@@ -6,27 +6,18 @@ import com.mycompany.myapp.repository.MatiereRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -34,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link MatiereResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-@ExtendWith(MockitoExtension.class)
+
 @AutoConfigureMockMvc
 @WithMockUser
 public class MatiereResourceIT {
@@ -48,17 +39,8 @@ public class MatiereResourceIT {
     private static final Double DEFAULT_COEFFICIENT = 1D;
     private static final Double UPDATED_COEFFICIENT = 2D;
 
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
-
     @Autowired
     private MatiereRepository matiereRepository;
-
-    @Mock
-    private MatiereRepository matiereRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -78,9 +60,7 @@ public class MatiereResourceIT {
         Matiere matiere = new Matiere()
             .libmatiere(DEFAULT_LIBMATIERE)
             .noteelimin(DEFAULT_NOTEELIMIN)
-            .coefficient(DEFAULT_COEFFICIENT)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .coefficient(DEFAULT_COEFFICIENT);
         return matiere;
     }
     /**
@@ -93,9 +73,7 @@ public class MatiereResourceIT {
         Matiere matiere = new Matiere()
             .libmatiere(UPDATED_LIBMATIERE)
             .noteelimin(UPDATED_NOTEELIMIN)
-            .coefficient(UPDATED_COEFFICIENT)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .coefficient(UPDATED_COEFFICIENT);
         return matiere;
     }
 
@@ -122,8 +100,6 @@ public class MatiereResourceIT {
         assertThat(testMatiere.getLibmatiere()).isEqualTo(DEFAULT_LIBMATIERE);
         assertThat(testMatiere.getNoteelimin()).isEqualTo(DEFAULT_NOTEELIMIN);
         assertThat(testMatiere.getCoefficient()).isEqualTo(DEFAULT_COEFFICIENT);
-        assertThat(testMatiere.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testMatiere.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -159,33 +135,9 @@ public class MatiereResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(matiere.getId().intValue())))
             .andExpect(jsonPath("$.[*].libmatiere").value(hasItem(DEFAULT_LIBMATIERE)))
             .andExpect(jsonPath("$.[*].noteelimin").value(hasItem(DEFAULT_NOTEELIMIN.doubleValue())))
-            .andExpect(jsonPath("$.[*].coefficient").value(hasItem(DEFAULT_COEFFICIENT.doubleValue())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].coefficient").value(hasItem(DEFAULT_COEFFICIENT.doubleValue())));
     }
     
-    @SuppressWarnings({"unchecked"})
-    public void getAllMatieresWithEagerRelationshipsIsEnabled() throws Exception {
-        MatiereResource matiereResource = new MatiereResource(matiereRepositoryMock);
-        when(matiereRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restMatiereMockMvc.perform(get("/api/matieres?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(matiereRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllMatieresWithEagerRelationshipsIsNotEnabled() throws Exception {
-        MatiereResource matiereResource = new MatiereResource(matiereRepositoryMock);
-        when(matiereRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restMatiereMockMvc.perform(get("/api/matieres?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(matiereRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getMatiere() throws Exception {
@@ -199,9 +151,7 @@ public class MatiereResourceIT {
             .andExpect(jsonPath("$.id").value(matiere.getId().intValue()))
             .andExpect(jsonPath("$.libmatiere").value(DEFAULT_LIBMATIERE))
             .andExpect(jsonPath("$.noteelimin").value(DEFAULT_NOTEELIMIN.doubleValue()))
-            .andExpect(jsonPath("$.coefficient").value(DEFAULT_COEFFICIENT.doubleValue()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.coefficient").value(DEFAULT_COEFFICIENT.doubleValue()));
     }
 
     @Test
@@ -227,9 +177,7 @@ public class MatiereResourceIT {
         updatedMatiere
             .libmatiere(UPDATED_LIBMATIERE)
             .noteelimin(UPDATED_NOTEELIMIN)
-            .coefficient(UPDATED_COEFFICIENT)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .coefficient(UPDATED_COEFFICIENT);
 
         restMatiereMockMvc.perform(put("/api/matieres")
             .contentType(MediaType.APPLICATION_JSON)
@@ -243,8 +191,6 @@ public class MatiereResourceIT {
         assertThat(testMatiere.getLibmatiere()).isEqualTo(UPDATED_LIBMATIERE);
         assertThat(testMatiere.getNoteelimin()).isEqualTo(UPDATED_NOTEELIMIN);
         assertThat(testMatiere.getCoefficient()).isEqualTo(UPDATED_COEFFICIENT);
-        assertThat(testMatiere.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testMatiere.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

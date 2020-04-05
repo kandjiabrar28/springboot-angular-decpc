@@ -49,19 +49,17 @@ public class Candidat implements Serializable {
     @Column(name = "niveau")
     private String niveau;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
-
-    @OneToMany(mappedBy = "candidat")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<TAnonym> tanonyms = new HashSet<>();
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Table table;
 
     @OneToMany(mappedBy = "candidat")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Note> notes = new HashSet<>();
+
+    @OneToMany(mappedBy = "candidat")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Anonymat> anonymats = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -176,55 +174,17 @@ public class Candidat implements Serializable {
         this.niveau = niveau;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
+    public Table getTable() {
+        return table;
     }
 
-    public Candidat dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public Candidat table(Table table) {
+        this.table = table;
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Candidat dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-        return this;
-    }
-
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-    }
-
-    public Set<TAnonym> getTanonyms() {
-        return tanonyms;
-    }
-
-    public Candidat tanonyms(Set<TAnonym> tAnonyms) {
-        this.tanonyms = tAnonyms;
-        return this;
-    }
-
-    public Candidat addTanonym(TAnonym tAnonym) {
-        this.tanonyms.add(tAnonym);
-        tAnonym.setCandidat(this);
-        return this;
-    }
-
-    public Candidat removeTanonym(TAnonym tAnonym) {
-        this.tanonyms.remove(tAnonym);
-        tAnonym.setCandidat(null);
-        return this;
-    }
-
-    public void setTanonyms(Set<TAnonym> tAnonyms) {
-        this.tanonyms = tAnonyms;
+    public void setTable(Table table) {
+        this.table = table;
     }
 
     public Set<Note> getNotes() {
@@ -250,6 +210,31 @@ public class Candidat implements Serializable {
 
     public void setNotes(Set<Note> notes) {
         this.notes = notes;
+    }
+
+    public Set<Anonymat> getAnonymats() {
+        return anonymats;
+    }
+
+    public Candidat anonymats(Set<Anonymat> anonymats) {
+        this.anonymats = anonymats;
+        return this;
+    }
+
+    public Candidat addAnonymat(Anonymat anonymat) {
+        this.anonymats.add(anonymat);
+        anonymat.setCandidat(this);
+        return this;
+    }
+
+    public Candidat removeAnonymat(Anonymat anonymat) {
+        this.anonymats.remove(anonymat);
+        anonymat.setCandidat(null);
+        return this;
+    }
+
+    public void setAnonymats(Set<Anonymat> anonymats) {
+        this.anonymats = anonymats;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -281,8 +266,6 @@ public class Candidat implements Serializable {
             ", sexe='" + getSexe() + "'" +
             ", datenais='" + getDatenais() + "'" +
             ", niveau='" + getNiveau() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

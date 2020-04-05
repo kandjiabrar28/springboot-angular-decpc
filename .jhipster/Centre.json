@@ -20,14 +20,6 @@
         {
             "fieldName": "email",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [

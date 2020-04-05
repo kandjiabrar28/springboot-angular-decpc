@@ -6,20 +6,25 @@ import com.mycompany.myapp.repository.CorrecteurRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -27,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CorrecteurResource} REST controller.
  */
 @SpringBootTest(classes = JhipsterApp.class)
-
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class CorrecteurResourceIT {
@@ -53,17 +58,11 @@ public class CorrecteurResourceIT {
     private static final String DEFAULT_SEXE = "AAAAAAAAAA";
     private static final String UPDATED_SEXE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DATENAIS = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATENAIS = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
-
     @Autowired
     private CorrecteurRepository correcteurRepository;
+
+    @Mock
+    private CorrecteurRepository correcteurRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -87,10 +86,7 @@ public class CorrecteurResourceIT {
             .provenance(DEFAULT_PROVENANCE)
             .cni(DEFAULT_CNI)
             .telephone(DEFAULT_TELEPHONE)
-            .sexe(DEFAULT_SEXE)
-            .datenais(DEFAULT_DATENAIS)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .sexe(DEFAULT_SEXE);
         return correcteur;
     }
     /**
@@ -107,10 +103,7 @@ public class CorrecteurResourceIT {
             .provenance(UPDATED_PROVENANCE)
             .cni(UPDATED_CNI)
             .telephone(UPDATED_TELEPHONE)
-            .sexe(UPDATED_SEXE)
-            .datenais(UPDATED_DATENAIS)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .sexe(UPDATED_SEXE);
         return correcteur;
     }
 
@@ -141,9 +134,6 @@ public class CorrecteurResourceIT {
         assertThat(testCorrecteur.getCni()).isEqualTo(DEFAULT_CNI);
         assertThat(testCorrecteur.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
         assertThat(testCorrecteur.getSexe()).isEqualTo(DEFAULT_SEXE);
-        assertThat(testCorrecteur.getDatenais()).isEqualTo(DEFAULT_DATENAIS);
-        assertThat(testCorrecteur.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testCorrecteur.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -183,12 +173,31 @@ public class CorrecteurResourceIT {
             .andExpect(jsonPath("$.[*].provenance").value(hasItem(DEFAULT_PROVENANCE)))
             .andExpect(jsonPath("$.[*].cni").value(hasItem(DEFAULT_CNI)))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)))
-            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE)))
-            .andExpect(jsonPath("$.[*].datenais").value(hasItem(DEFAULT_DATENAIS.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE)));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllCorrecteursWithEagerRelationshipsIsEnabled() throws Exception {
+        CorrecteurResource correcteurResource = new CorrecteurResource(correcteurRepositoryMock);
+        when(correcteurRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restCorrecteurMockMvc.perform(get("/api/correcteurs?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(correcteurRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllCorrecteursWithEagerRelationshipsIsNotEnabled() throws Exception {
+        CorrecteurResource correcteurResource = new CorrecteurResource(correcteurRepositoryMock);
+        when(correcteurRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restCorrecteurMockMvc.perform(get("/api/correcteurs?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(correcteurRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getCorrecteur() throws Exception {
@@ -206,10 +215,7 @@ public class CorrecteurResourceIT {
             .andExpect(jsonPath("$.provenance").value(DEFAULT_PROVENANCE))
             .andExpect(jsonPath("$.cni").value(DEFAULT_CNI))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE))
-            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE))
-            .andExpect(jsonPath("$.datenais").value(DEFAULT_DATENAIS.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE));
     }
 
     @Test
@@ -239,10 +245,7 @@ public class CorrecteurResourceIT {
             .provenance(UPDATED_PROVENANCE)
             .cni(UPDATED_CNI)
             .telephone(UPDATED_TELEPHONE)
-            .sexe(UPDATED_SEXE)
-            .datenais(UPDATED_DATENAIS)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .sexe(UPDATED_SEXE);
 
         restCorrecteurMockMvc.perform(put("/api/correcteurs")
             .contentType(MediaType.APPLICATION_JSON)
@@ -260,9 +263,6 @@ public class CorrecteurResourceIT {
         assertThat(testCorrecteur.getCni()).isEqualTo(UPDATED_CNI);
         assertThat(testCorrecteur.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
         assertThat(testCorrecteur.getSexe()).isEqualTo(UPDATED_SEXE);
-        assertThat(testCorrecteur.getDatenais()).isEqualTo(UPDATED_DATENAIS);
-        assertThat(testCorrecteur.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testCorrecteur.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

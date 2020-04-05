@@ -14,8 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,12 +45,6 @@ public class CentreResourceIT {
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
-
     @Autowired
     private CentreRepository centreRepository;
 
@@ -76,9 +68,7 @@ public class CentreResourceIT {
             .region(DEFAULT_REGION)
             .departement(DEFAULT_DEPARTEMENT)
             .telephone(DEFAULT_TELEPHONE)
-            .email(DEFAULT_EMAIL)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .email(DEFAULT_EMAIL);
         return centre;
     }
     /**
@@ -93,9 +83,7 @@ public class CentreResourceIT {
             .region(UPDATED_REGION)
             .departement(UPDATED_DEPARTEMENT)
             .telephone(UPDATED_TELEPHONE)
-            .email(UPDATED_EMAIL)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .email(UPDATED_EMAIL);
         return centre;
     }
 
@@ -124,8 +112,6 @@ public class CentreResourceIT {
         assertThat(testCentre.getDepartement()).isEqualTo(DEFAULT_DEPARTEMENT);
         assertThat(testCentre.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
         assertThat(testCentre.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testCentre.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testCentre.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -163,9 +149,7 @@ public class CentreResourceIT {
             .andExpect(jsonPath("$.[*].region").value(hasItem(DEFAULT_REGION)))
             .andExpect(jsonPath("$.[*].departement").value(hasItem(DEFAULT_DEPARTEMENT)))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
     
     @Test
@@ -183,9 +167,7 @@ public class CentreResourceIT {
             .andExpect(jsonPath("$.region").value(DEFAULT_REGION))
             .andExpect(jsonPath("$.departement").value(DEFAULT_DEPARTEMENT))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL));
     }
 
     @Test
@@ -213,9 +195,7 @@ public class CentreResourceIT {
             .region(UPDATED_REGION)
             .departement(UPDATED_DEPARTEMENT)
             .telephone(UPDATED_TELEPHONE)
-            .email(UPDATED_EMAIL)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .email(UPDATED_EMAIL);
 
         restCentreMockMvc.perform(put("/api/centres")
             .contentType(MediaType.APPLICATION_JSON)
@@ -231,8 +211,6 @@ public class CentreResourceIT {
         assertThat(testCentre.getDepartement()).isEqualTo(UPDATED_DEPARTEMENT);
         assertThat(testCentre.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
         assertThat(testCentre.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCentre.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testCentre.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

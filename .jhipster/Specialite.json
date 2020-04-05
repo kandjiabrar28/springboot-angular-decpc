@@ -1,0 +1,45 @@
+{
+    "name": "Specialite",
+    "fields": [
+        {
+            "fieldName": "libspec",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "session",
+            "otherEntityRelationshipName": "specialite",
+            "relationshipName": "session"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "niveau",
+            "otherEntityRelationshipName": "specialite",
+            "relationshipName": "niveau",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "filiere",
+            "otherEntityRelationshipName": "specialite",
+            "relationshipName": "filiere",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200405150500",
+    "entityTableName": "specialite",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

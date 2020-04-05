@@ -9,10 +9,10 @@ import { ITour, Tour } from 'app/shared/model/tour.model';
 import { TourService } from './tour.service';
 import { IMatiere } from 'app/shared/model/matiere.model';
 import { MatiereService } from 'app/entities/matiere/matiere.service';
-import { ITAnonym } from 'app/shared/model/t-anonym.model';
-import { TAnonymService } from 'app/entities/t-anonym/t-anonym.service';
+import { IExamen } from 'app/shared/model/examen.model';
+import { ExamenService } from 'app/entities/examen/examen.service';
 
-type SelectableEntity = IMatiere | ITAnonym;
+type SelectableEntity = IMatiere | IExamen;
 
 @Component({
   selector: 'jhi-tour-update',
@@ -21,23 +21,19 @@ type SelectableEntity = IMatiere | ITAnonym;
 export class TourUpdateComponent implements OnInit {
   isSaving = false;
   matieres: IMatiere[] = [];
-  tanonyms: ITAnonym[] = [];
-  dateCreationDp: any;
-  dateModificationDp: any;
+  examen: IExamen[] = [];
 
   editForm = this.fb.group({
     id: [],
     numtour: [],
-    dateCreation: [],
-    dateModification: [],
     matiere: [],
-    tAnonym: []
+    examen: []
   });
 
   constructor(
     protected tourService: TourService,
     protected matiereService: MatiereService,
-    protected tAnonymService: TAnonymService,
+    protected examenService: ExamenService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -48,7 +44,7 @@ export class TourUpdateComponent implements OnInit {
 
       this.matiereService.query().subscribe((res: HttpResponse<IMatiere[]>) => (this.matieres = res.body || []));
 
-      this.tAnonymService.query().subscribe((res: HttpResponse<ITAnonym[]>) => (this.tanonyms = res.body || []));
+      this.examenService.query().subscribe((res: HttpResponse<IExamen[]>) => (this.examen = res.body || []));
     });
   }
 
@@ -56,10 +52,8 @@ export class TourUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: tour.id,
       numtour: tour.numtour,
-      dateCreation: tour.dateCreation,
-      dateModification: tour.dateModification,
       matiere: tour.matiere,
-      tAnonym: tour.tAnonym
+      examen: tour.examen
     });
   }
 
@@ -82,10 +76,8 @@ export class TourUpdateComponent implements OnInit {
       ...new Tour(),
       id: this.editForm.get(['id'])!.value,
       numtour: this.editForm.get(['numtour'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value,
       matiere: this.editForm.get(['matiere'])!.value,
-      tAnonym: this.editForm.get(['tAnonym'])!.value
+      examen: this.editForm.get(['examen'])!.value
     };
   }
 

@@ -4,9 +4,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ICandidat, Candidat } from 'app/shared/model/candidat.model';
 import { CandidatService } from './candidat.service';
+import { ITable } from 'app/shared/model/table.model';
+import { TableService } from 'app/entities/table/table.service';
 
 @Component({
   selector: 'jhi-candidat-update',
@@ -14,9 +17,8 @@ import { CandidatService } from './candidat.service';
 })
 export class CandidatUpdateComponent implements OnInit {
   isSaving = false;
+  tables: ITable[] = [];
   datenaisDp: any;
-  dateCreationDp: any;
-  dateModificationDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -28,15 +30,41 @@ export class CandidatUpdateComponent implements OnInit {
     sexe: [],
     datenais: [],
     niveau: [],
-    dateCreation: [],
-    dateModification: []
+    table: []
   });
 
-  constructor(protected candidatService: CandidatService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected candidatService: CandidatService,
+    protected tableService: TableService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ candidat }) => {
       this.updateForm(candidat);
+
+      this.tableService
+        .query({ filter: 'candidat-is-null' })
+        .pipe(
+          map((res: HttpResponse<ITable[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: ITable[]) => {
+          if (!candidat.table || !candidat.table.id) {
+            this.tables = resBody;
+          } else {
+            this.tableService
+              .find(candidat.table.id)
+              .pipe(
+                map((subRes: HttpResponse<ITable>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: ITable[]) => (this.tables = concatRes));
+          }
+        });
     });
   }
 
@@ -51,8 +79,7 @@ export class CandidatUpdateComponent implements OnInit {
       sexe: candidat.sexe,
       datenais: candidat.datenais,
       niveau: candidat.niveau,
-      dateCreation: candidat.dateCreation,
-      dateModification: candidat.dateModification
+      table: candidat.table
     });
   }
 
@@ -82,8 +109,7 @@ export class CandidatUpdateComponent implements OnInit {
       sexe: this.editForm.get(['sexe'])!.value,
       datenais: this.editForm.get(['datenais'])!.value,
       niveau: this.editForm.get(['niveau'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value
+      table: this.editForm.get(['table'])!.value
     };
   }
 
@@ -101,5 +127,9 @@ export class CandidatUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: ITable): any {
+    return item.id;
   }
 }

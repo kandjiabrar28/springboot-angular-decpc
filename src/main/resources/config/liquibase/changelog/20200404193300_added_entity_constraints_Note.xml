@@ -14,6 +14,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="matiere"/>
 
+        <addForeignKeyConstraint baseColumnNames="correcteur_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_correcteur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="correcteur"/>
+
         <addForeignKeyConstraint baseColumnNames="candidat_id"
                                  baseTableName="note"
                                  constraintName="fk_note_candidat_id"

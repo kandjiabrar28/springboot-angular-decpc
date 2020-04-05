@@ -1,0 +1,24 @@
+{
+  "jhipsterApp": {
+    "anonymat": {
+      "home": {
+        "title": "Anonymats",
+        "createLabel": "Create a new Anonymat",
+        "createOrEditLabel": "Create or edit a Anonymat",
+        "notFound": "No Anonymats found"
+      },
+      "created": "A new Anonymat is created with identifier {{ param }}",
+      "updated": "A Anonymat is updated with identifier {{ param }}",
+      "deleted": "A Anonymat is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Anonymat {{ id }}?"
+      },
+      "detail": {
+        "title": "Anonymat"
+      },
+      "numanoymat": "Numanoymat",
+      "candidat": "Candidat",
+      "tour": "Tour"
+    }
+  }
+}

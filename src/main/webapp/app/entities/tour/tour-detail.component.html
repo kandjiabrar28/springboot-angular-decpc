@@ -12,24 +12,16 @@
                 <dd>
                     <span>{{ tour.numtour }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.tour.dateCreation">Date Creation</span></dt>
-                <dd>
-                    <span>{{ tour.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.tour.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ tour.dateModification }}</span>
-                </dd>
                 <dt><span jhiTranslate="jhipsterApp.tour.matiere">Matiere</span></dt>
                 <dd>
                     <div *ngIf="tour.matiere">
                         <a [routerLink]="['/matiere', tour.matiere?.id, 'view']">{{ tour.matiere?.id }}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.tour.tAnonym">T Anonym</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.tour.examen">Examen</span></dt>
                 <dd>
-                    <div *ngIf="tour.tAnonym">
-                        <a [routerLink]="['/t-anonym', tour.tAnonym?.id, 'view']">{{ tour.tAnonym?.id }}</a>
+                    <div *ngIf="tour.examen">
+                        <a [routerLink]="['/examen', tour.examen?.id, 'view']">{{ tour.examen?.id }}</a>
                     </div>
                 </dd>
             </dl>

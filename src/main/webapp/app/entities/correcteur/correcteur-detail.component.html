@@ -36,17 +36,11 @@
                 <dd>
                     <span>{{ correcteur.sexe }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.correcteur.datenais">Datenais</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.correcteur.matiere">Matiere</span></dt>
                 <dd>
-                    <span>{{ correcteur.datenais }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.correcteur.dateCreation">Date Creation</span></dt>
-                <dd>
-                    <span>{{ correcteur.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.correcteur.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ correcteur.dateModification }}</span>
+                    <span *ngFor="let matiere of correcteur.matieres; let last = last">
+                        <a [routerLink]="['/matiere', matiere?.id, 'view']">{{ matiere.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
                 </dd>
             </dl>
 

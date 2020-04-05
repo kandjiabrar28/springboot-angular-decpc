@@ -31,8 +31,7 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.sexe">Sexe</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.datenais">Datenais</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.niveau">Niveau</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.candidat.table">Table</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -47,8 +46,11 @@
                     <td>{{ candidat.sexe }}</td>
                     <td>{{ candidat.datenais | date:'mediumDate' }}</td>
                     <td>{{ candidat.niveau }}</td>
-                    <td>{{ candidat.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ candidat.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="candidat.table">
+                            <a [routerLink]="['/table', candidat.table?.id, 'view']" >{{ candidat.table?.id }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

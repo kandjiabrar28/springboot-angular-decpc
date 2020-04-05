@@ -32,28 +32,28 @@
         {
             "fieldName": "niveau",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "tAnonym",
+            "relationshipType": "one-to-one",
+            "otherEntityName": "table",
             "otherEntityRelationshipName": "candidat",
-            "relationshipName": "tanonym"
+            "relationshipName": "table",
+            "otherEntityField": "id",
+            "ownerSide": true
         },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "note",
             "otherEntityRelationshipName": "candidat",
             "relationshipName": "note"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "anonymat",
+            "otherEntityRelationshipName": "candidat",
+            "relationshipName": "anonymat"
         }
     ],
     "changelogDate": "20200404192700",

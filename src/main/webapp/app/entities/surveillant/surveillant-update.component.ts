@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 
 import { ISurveillant, Surveillant } from 'app/shared/model/surveillant.model';
 import { SurveillantService } from './surveillant.service';
-import { IPVSurveillance } from 'app/shared/model/pv-surveillance.model';
-import { PVSurveillanceService } from 'app/entities/pv-surveillance/pv-surveillance.service';
 
 @Component({
   selector: 'jhi-surveillant-update',
@@ -16,10 +14,7 @@ import { PVSurveillanceService } from 'app/entities/pv-surveillance/pv-surveilla
 })
 export class SurveillantUpdateComponent implements OnInit {
   isSaving = false;
-  pvsurveillances: IPVSurveillance[] = [];
   datenaisDp: any;
-  dateCreationDp: any;
-  dateModificationDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -30,24 +25,14 @@ export class SurveillantUpdateComponent implements OnInit {
     cni: [],
     telephone: [],
     sexe: [],
-    datenais: [],
-    dateCreation: [],
-    dateModification: [],
-    pvsurveillance: []
+    datenais: []
   });
 
-  constructor(
-    protected surveillantService: SurveillantService,
-    protected pVSurveillanceService: PVSurveillanceService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected surveillantService: SurveillantService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ surveillant }) => {
       this.updateForm(surveillant);
-
-      this.pVSurveillanceService.query().subscribe((res: HttpResponse<IPVSurveillance[]>) => (this.pvsurveillances = res.body || []));
     });
   }
 
@@ -61,10 +46,7 @@ export class SurveillantUpdateComponent implements OnInit {
       cni: surveillant.cni,
       telephone: surveillant.telephone,
       sexe: surveillant.sexe,
-      datenais: surveillant.datenais,
-      dateCreation: surveillant.dateCreation,
-      dateModification: surveillant.dateModification,
-      pvsurveillance: surveillant.pvsurveillance
+      datenais: surveillant.datenais
     });
   }
 
@@ -93,10 +75,7 @@ export class SurveillantUpdateComponent implements OnInit {
       cni: this.editForm.get(['cni'])!.value,
       telephone: this.editForm.get(['telephone'])!.value,
       sexe: this.editForm.get(['sexe'])!.value,
-      datenais: this.editForm.get(['datenais'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value,
-      pvsurveillance: this.editForm.get(['pvsurveillance'])!.value
+      datenais: this.editForm.get(['datenais'])!.value
     };
   }
 
@@ -114,9 +93,5 @@ export class SurveillantUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IPVSurveillance): any {
-    return item.id;
   }
 }

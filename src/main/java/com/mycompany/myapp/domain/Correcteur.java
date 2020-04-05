@@ -1,6 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,7 +7,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,18 +45,19 @@ public class Correcteur implements Serializable {
     @Column(name = "sexe")
     private String sexe;
 
-    @Column(name = "datenais")
-    private LocalDate datenais;
-
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
-
-    @ManyToMany(mappedBy = "correcteurs")
+    @OneToMany(mappedBy = "correcteur")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
+    private Set<PlageCopie> plagecopies = new HashSet<>();
+
+    @OneToMany(mappedBy = "correcteur")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Note> notes = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "correcteur_matiere",
+               joinColumns = @JoinColumn(name = "correcteur_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "matiere_id", referencedColumnName = "id"))
     private Set<Matiere> matieres = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -161,43 +160,54 @@ public class Correcteur implements Serializable {
         this.sexe = sexe;
     }
 
-    public LocalDate getDatenais() {
-        return datenais;
+    public Set<PlageCopie> getPlagecopies() {
+        return plagecopies;
     }
 
-    public Correcteur datenais(LocalDate datenais) {
-        this.datenais = datenais;
+    public Correcteur plagecopies(Set<PlageCopie> plageCopies) {
+        this.plagecopies = plageCopies;
         return this;
     }
 
-    public void setDatenais(LocalDate datenais) {
-        this.datenais = datenais;
-    }
-
-    public LocalDate getDateCreation() {
-        return dateCreation;
-    }
-
-    public Correcteur dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public Correcteur addPlagecopie(PlageCopie plageCopie) {
+        this.plagecopies.add(plageCopie);
+        plageCopie.setCorrecteur(this);
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Correcteur dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Correcteur removePlagecopie(PlageCopie plageCopie) {
+        this.plagecopies.remove(plageCopie);
+        plageCopie.setCorrecteur(null);
         return this;
     }
 
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public void setPlagecopies(Set<PlageCopie> plageCopies) {
+        this.plagecopies = plageCopies;
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public Correcteur notes(Set<Note> notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public Correcteur addNote(Note note) {
+        this.notes.add(note);
+        note.setCorrecteur(this);
+        return this;
+    }
+
+    public Correcteur removeNote(Note note) {
+        this.notes.remove(note);
+        note.setCorrecteur(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
     }
 
     public Set<Matiere> getMatieres() {
@@ -253,9 +263,6 @@ public class Correcteur implements Serializable {
             ", cni='" + getCni() + "'" +
             ", telephone='" + getTelephone() + "'" +
             ", sexe='" + getSexe() + "'" +
-            ", datenais='" + getDatenais() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

@@ -3,15 +3,7 @@
     "fields": [
         {
             "fieldName": "numjury",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
+            "fieldType": "Integer"
         }
     ],
     "relationships": [
@@ -21,7 +13,7 @@
             "otherEntityRelationshipName": "jury",
             "relationshipName": "examen",
             "otherEntityField": "id",
-            "ownerSide": false
+            "ownerSide": true
         }
     ],
     "changelogDate": "20200404193100",

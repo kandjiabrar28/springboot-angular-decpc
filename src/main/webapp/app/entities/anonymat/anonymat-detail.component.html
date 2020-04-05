@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="anonymat">
+            <h2><span jhiTranslate="jhipsterApp.anonymat.detail.title">Anonymat</span> {{ anonymat.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterApp.anonymat.numanoymat">Numanoymat</span></dt>
+                <dd>
+                    <span>{{ anonymat.numanoymat }}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.anonymat.candidat">Candidat</span></dt>
+                <dd>
+                    <div *ngIf="anonymat.candidat">
+                        <a [routerLink]="['/candidat', anonymat.candidat?.id, 'view']">{{ anonymat.candidat?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.anonymat.tour">Tour</span></dt>
+                <dd>
+                    <div *ngIf="anonymat.tour">
+                        <a [routerLink]="['/tour', anonymat.tour?.id, 'view']">{{ anonymat.tour?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/anonymat', anonymat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -4,17 +4,15 @@
         {
             "fieldName": "numtour",
             "fieldType": "Integer"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "anonymat",
+            "otherEntityRelationshipName": "tour",
+            "relationshipName": "anonymat"
+        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "matiere",
@@ -24,9 +22,9 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "tAnonym",
+            "otherEntityName": "examen",
             "otherEntityRelationshipName": "tour",
-            "relationshipName": "tAnonym",
+            "relationshipName": "examen",
             "otherEntityField": "id"
         }
     ],

@@ -1,4 +1,3 @@
-import { Moment } from 'moment';
 import { ISalle } from 'app/shared/model/salle.model';
 
 export interface ICentre {
@@ -8,8 +7,6 @@ export interface ICentre {
   departement?: string;
   telephone?: string;
   email?: string;
-  dateCreation?: Moment;
-  dateModification?: Moment;
   salles?: ISalle[];
 }
 
@@ -21,8 +18,6 @@ export class Centre implements ICentre {
     public departement?: string,
     public telephone?: string,
     public email?: string,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
     public salles?: ISalle[]
   ) {}
 }

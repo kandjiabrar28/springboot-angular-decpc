@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IMatiere, Matiere } from 'app/shared/model/matiere.model';
 import { MatiereService } from './matiere.service';
-import { ICorrecteur } from 'app/shared/model/correcteur.model';
-import { CorrecteurService } from 'app/entities/correcteur/correcteur.service';
 
 @Component({
   selector: 'jhi-matiere-update',
@@ -16,32 +14,19 @@ import { CorrecteurService } from 'app/entities/correcteur/correcteur.service';
 })
 export class MatiereUpdateComponent implements OnInit {
   isSaving = false;
-  correcteurs: ICorrecteur[] = [];
-  dateCreationDp: any;
-  dateModificationDp: any;
 
   editForm = this.fb.group({
     id: [],
     libmatiere: [],
     noteelimin: [],
-    coefficient: [],
-    dateCreation: [],
-    dateModification: [],
-    correcteurs: []
+    coefficient: []
   });
 
-  constructor(
-    protected matiereService: MatiereService,
-    protected correcteurService: CorrecteurService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected matiereService: MatiereService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ matiere }) => {
       this.updateForm(matiere);
-
-      this.correcteurService.query().subscribe((res: HttpResponse<ICorrecteur[]>) => (this.correcteurs = res.body || []));
     });
   }
 
@@ -50,10 +35,7 @@ export class MatiereUpdateComponent implements OnInit {
       id: matiere.id,
       libmatiere: matiere.libmatiere,
       noteelimin: matiere.noteelimin,
-      coefficient: matiere.coefficient,
-      dateCreation: matiere.dateCreation,
-      dateModification: matiere.dateModification,
-      correcteurs: matiere.correcteurs
+      coefficient: matiere.coefficient
     });
   }
 
@@ -77,10 +59,7 @@ export class MatiereUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       libmatiere: this.editForm.get(['libmatiere'])!.value,
       noteelimin: this.editForm.get(['noteelimin'])!.value,
-      coefficient: this.editForm.get(['coefficient'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value,
-      correcteurs: this.editForm.get(['correcteurs'])!.value
+      coefficient: this.editForm.get(['coefficient'])!.value
     };
   }
 
@@ -98,20 +77,5 @@ export class MatiereUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: ICorrecteur): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: ICorrecteur[], option: ICorrecteur): ICorrecteur {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
   }
 }

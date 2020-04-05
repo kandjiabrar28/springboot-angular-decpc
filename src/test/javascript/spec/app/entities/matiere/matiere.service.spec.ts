@@ -1,7 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { MatiereService } from 'app/entities/matiere/matiere.service';
 import { IMatiere, Matiere } from 'app/shared/model/matiere.model';
 
@@ -12,7 +10,6 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IMatiere;
     let expectedResult: IMatiere | IMatiere[] | boolean | null;
-    let currentDate: moment.Moment;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,20 +19,13 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(MatiereService);
       httpMock = injector.get(HttpTestingController);
-      currentDate = moment();
 
-      elemDefault = new Matiere(0, 'AAAAAAA', 0, 0, currentDate, currentDate);
+      elemDefault = new Matiere(0, 'AAAAAAA', 0, 0);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign(
-          {
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -47,20 +37,12 @@ describe('Service Tests', () => {
       it('should create a Matiere', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            id: 0
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.create(new Matiere()).subscribe(resp => (expectedResult = resp.body));
 
@@ -74,20 +56,12 @@ describe('Service Tests', () => {
           {
             libmatiere: 'BBBBBB',
             noteelimin: 1,
-            coefficient: 1,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            coefficient: 1
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -101,20 +75,12 @@ describe('Service Tests', () => {
           {
             libmatiere: 'BBBBBB',
             noteelimin: 1,
-            coefficient: 1,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            coefficient: 1
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 

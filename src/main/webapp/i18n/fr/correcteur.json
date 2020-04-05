@@ -23,9 +23,8 @@
       "cni": "Cni",
       "telephone": "Telephone",
       "sexe": "Sexe",
-      "datenais": "Datenais",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
+      "plagecopie": "Plagecopie",
+      "note": "Note",
       "matiere": "Matiere"
     }
   }

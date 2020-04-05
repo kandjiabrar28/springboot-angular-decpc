@@ -1,0 +1,25 @@
+{
+  "jhipsterApp": {
+    "plageCopie": {
+      "home": {
+        "title": "PlageCopies",
+        "createLabel": "Créer un nouveau Plage Copie",
+        "createOrEditLabel": "Créer ou éditer un Plage Copie",
+        "notFound": "Aucun Plage Copie trouvé"
+      },
+      "created": "Un nouveau Plage Copie a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Plage Copie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Plage Copie avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Plage Copie {{ id }} ?"
+      },
+      "detail": {
+        "title": "Plage Copie"
+      },
+      "plage": "Plage",
+      "typecopie": "Typecopie",
+      "nombrecopie": "Nombrecopie",
+      "correcteur": "Correcteur"
+    }
+  }
+}

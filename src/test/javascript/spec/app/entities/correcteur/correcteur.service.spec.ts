@@ -1,7 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { CorrecteurService } from 'app/entities/correcteur/correcteur.service';
 import { ICorrecteur, Correcteur } from 'app/shared/model/correcteur.model';
 
@@ -12,7 +10,6 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: ICorrecteur;
     let expectedResult: ICorrecteur | ICorrecteur[] | boolean | null;
-    let currentDate: moment.Moment;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,33 +19,13 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(CorrecteurService);
       httpMock = injector.get(HttpTestingController);
-      currentDate = moment();
 
-      elemDefault = new Correcteur(
-        0,
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        currentDate,
-        currentDate,
-        currentDate
-      );
+      elemDefault = new Correcteur(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign(
-          {
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -60,22 +37,12 @@ describe('Service Tests', () => {
       it('should create a Correcteur', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0,
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            id: 0
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            datenais: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.create(new Correcteur()).subscribe(resp => (expectedResult = resp.body));
 
@@ -93,22 +60,12 @@ describe('Service Tests', () => {
             provenance: 'BBBBBB',
             cni: 'BBBBBB',
             telephone: 'BBBBBB',
-            sexe: 'BBBBBB',
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            sexe: 'BBBBBB'
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            datenais: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -126,22 +83,12 @@ describe('Service Tests', () => {
             provenance: 'BBBBBB',
             cni: 'BBBBBB',
             telephone: 'BBBBBB',
-            sexe: 'BBBBBB',
-            datenais: currentDate.format(DATE_FORMAT),
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            sexe: 'BBBBBB'
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            datenais: currentDate,
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 

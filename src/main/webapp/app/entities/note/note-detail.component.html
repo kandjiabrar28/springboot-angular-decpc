@@ -12,18 +12,16 @@
                 <dd>
                     <span>{{ note.note }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.note.dateCreation">Date Creation</span></dt>
-                <dd>
-                    <span>{{ note.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.note.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ note.dateModification }}</span>
-                </dd>
                 <dt><span jhiTranslate="jhipsterApp.note.matiere">Matiere</span></dt>
                 <dd>
                     <div *ngIf="note.matiere">
                         <a [routerLink]="['/matiere', note.matiere?.id, 'view']">{{ note.matiere?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jhipsterApp.note.correcteur">Correcteur</span></dt>
+                <dd>
+                    <div *ngIf="note.correcteur">
+                        <a [routerLink]="['/correcteur', note.correcteur?.id, 'view']">{{ note.correcteur?.id }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jhipsterApp.note.candidat">Candidat</span></dt>

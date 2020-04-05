@@ -31,9 +31,6 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.telephone">Telephone</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.sexe">Sexe</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.datenais">Datenais</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.dateModification">Date Modification</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.surveillant.pvsurveillance">Pvsurveillance</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -48,13 +45,6 @@
                     <td>{{ surveillant.telephone }}</td>
                     <td>{{ surveillant.sexe }}</td>
                     <td>{{ surveillant.datenais | date:'mediumDate' }}</td>
-                    <td>{{ surveillant.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ surveillant.dateModification | date:'mediumDate' }}</td>
-                    <td>
-                        <div *ngIf="surveillant.pvsurveillance">
-                            <a [routerLink]="['/pv-surveillance', surveillant.pvsurveillance?.id, 'view']" >{{ surveillant.pvsurveillance?.id }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

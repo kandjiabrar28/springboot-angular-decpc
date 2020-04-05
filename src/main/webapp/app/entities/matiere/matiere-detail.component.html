@@ -20,20 +20,6 @@
                 <dd>
                     <span>{{ matiere.coefficient }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.matiere.dateCreation">Date Creation</span></dt>
-                <dd>
-                    <span>{{ matiere.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.matiere.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ matiere.dateModification }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.matiere.correcteur">Correcteur</span></dt>
-                <dd>
-                    <span *ngFor="let correcteur of matiere.correcteurs; let last = last">
-                        <a [routerLink]="['/correcteur', correcteur?.id, 'view']">{{ correcteur.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
             </dl>
 
             <button type="submit"

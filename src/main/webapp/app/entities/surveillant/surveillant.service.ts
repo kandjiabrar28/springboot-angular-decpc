@@ -51,13 +51,7 @@ export class SurveillantService {
 
   protected convertDateFromClient(surveillant: ISurveillant): ISurveillant {
     const copy: ISurveillant = Object.assign({}, surveillant, {
-      datenais: surveillant.datenais && surveillant.datenais.isValid() ? surveillant.datenais.format(DATE_FORMAT) : undefined,
-      dateCreation:
-        surveillant.dateCreation && surveillant.dateCreation.isValid() ? surveillant.dateCreation.format(DATE_FORMAT) : undefined,
-      dateModification:
-        surveillant.dateModification && surveillant.dateModification.isValid()
-          ? surveillant.dateModification.format(DATE_FORMAT)
-          : undefined
+      datenais: surveillant.datenais && surveillant.datenais.isValid() ? surveillant.datenais.format(DATE_FORMAT) : undefined
     });
     return copy;
   }
@@ -65,8 +59,6 @@ export class SurveillantService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.datenais = res.body.datenais ? moment(res.body.datenais) : undefined;
-      res.body.dateCreation = res.body.dateCreation ? moment(res.body.dateCreation) : undefined;
-      res.body.dateModification = res.body.dateModification ? moment(res.body.dateModification) : undefined;
     }
     return res;
   }
@@ -75,8 +67,6 @@ export class SurveillantService {
     if (res.body) {
       res.body.forEach((surveillant: ISurveillant) => {
         surveillant.datenais = surveillant.datenais ? moment(surveillant.datenais) : undefined;
-        surveillant.dateCreation = surveillant.dateCreation ? moment(surveillant.dateCreation) : undefined;
-        surveillant.dateModification = surveillant.dateModification ? moment(surveillant.dateModification) : undefined;
       });
     }
     return res;

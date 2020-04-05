@@ -1,0 +1,30 @@
+{
+    "name": "Filiere",
+    "fields": [
+        {
+            "fieldName": "libfiliere",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "specialite",
+            "otherEntityRelationshipName": "filiere",
+            "relationshipName": "specialite"
+        }
+    ],
+    "changelogDate": "20200405150800",
+    "entityTableName": "filiere",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

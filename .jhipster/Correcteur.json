@@ -28,28 +28,28 @@
         {
             "fieldName": "sexe",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "datenais",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "plageCopie",
+            "otherEntityRelationshipName": "correcteur",
+            "relationshipName": "plagecopie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "note",
+            "otherEntityRelationshipName": "correcteur",
+            "relationshipName": "note"
+        },
         {
             "relationshipType": "many-to-many",
             "otherEntityName": "matiere",
             "otherEntityRelationshipName": "correcteur",
             "relationshipName": "matiere",
             "otherEntityField": "id",
-            "ownerSide": false
+            "ownerSide": true
         }
     ],
     "changelogDate": "20200404192900",

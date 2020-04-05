@@ -26,9 +26,6 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.matiere.libmatiere">Libmatiere</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.matiere.noteelimin">Noteelimin</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.matiere.coefficient">Coefficient</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.matiere.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.matiere.dateModification">Date Modification</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.matiere.correcteur">Correcteur</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -38,13 +35,6 @@
                     <td>{{ matiere.libmatiere }}</td>
                     <td>{{ matiere.noteelimin }}</td>
                     <td>{{ matiere.coefficient }}</td>
-                    <td>{{ matiere.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ matiere.dateModification | date:'mediumDate' }}</td>
-                    <td>
-                        <span *ngFor="let correcteur of matiere.correcteurs; let last = last">
-                            <a class="form-control-static" [routerLink]="['/correcteur', correcteur?.id, 'view']">{{ correcteur.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

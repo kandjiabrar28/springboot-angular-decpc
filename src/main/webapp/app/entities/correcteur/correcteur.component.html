@@ -30,9 +30,7 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.cni">Cni</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.telephone">Telephone</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.sexe">Sexe</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.datenais">Datenais</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.correcteur.matiere">Matiere</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -46,9 +44,11 @@
                     <td>{{ correcteur.cni }}</td>
                     <td>{{ correcteur.telephone }}</td>
                     <td>{{ correcteur.sexe }}</td>
-                    <td>{{ correcteur.datenais | date:'mediumDate' }}</td>
-                    <td>{{ correcteur.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ correcteur.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <span *ngFor="let matiere of correcteur.matieres; let last = last">
+                            <a class="form-control-static" [routerLink]="['/matiere', matiere?.id, 'view']">{{ matiere.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

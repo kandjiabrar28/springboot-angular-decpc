@@ -1,23 +1,21 @@
-import { Moment } from 'moment';
+import { IAnonymat } from 'app/shared/model/anonymat.model';
 import { IMatiere } from 'app/shared/model/matiere.model';
-import { ITAnonym } from 'app/shared/model/t-anonym.model';
+import { IExamen } from 'app/shared/model/examen.model';
 
 export interface ITour {
   id?: number;
   numtour?: number;
-  dateCreation?: Moment;
-  dateModification?: Moment;
+  anonymats?: IAnonymat[];
   matiere?: IMatiere;
-  tAnonym?: ITAnonym;
+  examen?: IExamen;
 }
 
 export class Tour implements ITour {
   constructor(
     public id?: number,
     public numtour?: number,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
+    public anonymats?: IAnonymat[],
     public matiere?: IMatiere,
-    public tAnonym?: ITAnonym
+    public examen?: IExamen
   ) {}
 }

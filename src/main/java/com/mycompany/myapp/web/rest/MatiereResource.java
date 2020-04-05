@@ -82,13 +82,12 @@ public class MatiereResource {
     /**
      * {@code GET  /matieres} : get all the matieres.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of matieres in body.
      */
     @GetMapping("/matieres")
-    public List<Matiere> getAllMatieres(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<Matiere> getAllMatieres() {
         log.debug("REST request to get all Matieres");
-        return matiereRepository.findAllWithEagerRelationships();
+        return matiereRepository.findAll();
     }
 
     /**
@@ -100,7 +99,7 @@ public class MatiereResource {
     @GetMapping("/matieres/{id}")
     public ResponseEntity<Matiere> getMatiere(@PathVariable Long id) {
         log.debug("REST request to get Matiere : {}", id);
-        Optional<Matiere> matiere = matiereRepository.findOneWithEagerRelationships(id);
+        Optional<Matiere> matiere = matiereRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(matiere);
     }
 

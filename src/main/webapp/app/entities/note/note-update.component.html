@@ -13,28 +13,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jhipsterApp.note.note" for="field_note">Note</label>
-                    <input type="text" class="form-control" name="note" id="field_note"
+                    <input type="number" class="form-control" name="note" id="field_note"
                            formControlName="note"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.note.dateCreation" for="field_dateCreation">Date Creation</label>
-                    <div class="input-group">
-                        <input id="field_dateCreation" type="text" class="form-control" name="dateCreation" ngbDatepicker #dateCreationDp="ngbDatepicker" formControlName="dateCreation"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.note.dateModification" for="field_dateModification">Date Modification</label>
-                    <div class="input-group">
-                        <input id="field_dateModification" type="text" class="form-control" name="dateModification" ngbDatepicker #dateModificationDp="ngbDatepicker" formControlName="dateModification"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateModificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
                 </div>
 
                 <div class="form-group">
@@ -42,6 +22,14 @@
                     <select class="form-control" id="field_matiere" name="matiere" formControlName="matiere">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="matiereOption.id === editForm.get('matiere')!.value?.id ? editForm.get('matiere')!.value : matiereOption" *ngFor="let matiereOption of matieres; trackBy: trackById">{{ matiereOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterApp.note.correcteur" for="field_correcteur">Correcteur</label>
+                    <select class="form-control" id="field_correcteur" name="correcteur" formControlName="correcteur">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="correcteurOption.id === editForm.get('correcteur')!.value?.id ? editForm.get('correcteur')!.value : correcteurOption" *ngFor="let correcteurOption of correcteurs; trackBy: trackById">{{ correcteurOption.id }}</option>
                     </select>
                 </div>
 

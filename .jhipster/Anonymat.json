@@ -1,0 +1,38 @@
+{
+    "name": "Anonymat",
+    "fields": [
+        {
+            "fieldName": "numanoymat",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "candidat",
+            "otherEntityRelationshipName": "anonymat",
+            "relationshipName": "candidat",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tour",
+            "otherEntityRelationshipName": "anonymat",
+            "relationshipName": "tour",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200405150400",
+    "entityTableName": "anonymat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": [
+        "jhipster"
+    ]
+}

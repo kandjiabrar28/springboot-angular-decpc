@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,26 +31,13 @@ public class Salle implements Serializable {
     @Column(name = "nomsalle")
     private String nomsalle;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
+    @OneToMany(mappedBy = "salle")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Table> tables = new HashSet<>();
 
     @OneToMany(mappedBy = "salle")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Tables> tables = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties("salles")
-    private PVSurveillance pvsurveillance;
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "salle_surveillant",
-               joinColumns = @JoinColumn(name = "salle_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "surveillant_id", referencedColumnName = "id"))
-    private Set<Surveillant> surveillants = new HashSet<>();
+    private Set<PVSurveillance> pvsurveillances = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("salles")
@@ -92,93 +78,54 @@ public class Salle implements Serializable {
         this.nomsalle = nomsalle;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
-    }
-
-    public Salle dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-        return this;
-    }
-
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Salle dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-        return this;
-    }
-
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
-    }
-
-    public Set<Tables> getTables() {
+    public Set<Table> getTables() {
         return tables;
     }
 
-    public Salle tables(Set<Tables> tables) {
+    public Salle tables(Set<Table> tables) {
         this.tables = tables;
         return this;
     }
 
-    public Salle addTables(Tables tables) {
-        this.tables.add(tables);
-        tables.setSalle(this);
+    public Salle addTable(Table table) {
+        this.tables.add(table);
+        table.setSalle(this);
         return this;
     }
 
-    public Salle removeTables(Tables tables) {
-        this.tables.remove(tables);
-        tables.setSalle(null);
+    public Salle removeTable(Table table) {
+        this.tables.remove(table);
+        table.setSalle(null);
         return this;
     }
 
-    public void setTables(Set<Tables> tables) {
+    public void setTables(Set<Table> tables) {
         this.tables = tables;
     }
 
-    public PVSurveillance getPvsurveillance() {
-        return pvsurveillance;
+    public Set<PVSurveillance> getPvsurveillances() {
+        return pvsurveillances;
     }
 
-    public Salle pvsurveillance(PVSurveillance pVSurveillance) {
-        this.pvsurveillance = pVSurveillance;
+    public Salle pvsurveillances(Set<PVSurveillance> pVSurveillances) {
+        this.pvsurveillances = pVSurveillances;
         return this;
     }
 
-    public void setPvsurveillance(PVSurveillance pVSurveillance) {
-        this.pvsurveillance = pVSurveillance;
-    }
-
-    public Set<Surveillant> getSurveillants() {
-        return surveillants;
-    }
-
-    public Salle surveillants(Set<Surveillant> surveillants) {
-        this.surveillants = surveillants;
+    public Salle addPvsurveillance(PVSurveillance pVSurveillance) {
+        this.pvsurveillances.add(pVSurveillance);
+        pVSurveillance.setSalle(this);
         return this;
     }
 
-    public Salle addSurveillant(Surveillant surveillant) {
-        this.surveillants.add(surveillant);
-        surveillant.getSalles().add(this);
+    public Salle removePvsurveillance(PVSurveillance pVSurveillance) {
+        this.pvsurveillances.remove(pVSurveillance);
+        pVSurveillance.setSalle(null);
         return this;
     }
 
-    public Salle removeSurveillant(Surveillant surveillant) {
-        this.surveillants.remove(surveillant);
-        surveillant.getSalles().remove(this);
-        return this;
-    }
-
-    public void setSurveillants(Set<Surveillant> surveillants) {
-        this.surveillants = surveillants;
+    public void setPvsurveillances(Set<PVSurveillance> pVSurveillances) {
+        this.pvsurveillances = pVSurveillances;
     }
 
     public Centre getCentre() {
@@ -217,8 +164,6 @@ public class Salle implements Serializable {
             "id=" + getId() +
             ", numsalle=" + getNumsalle() +
             ", nomsalle='" + getNomsalle() + "'" +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

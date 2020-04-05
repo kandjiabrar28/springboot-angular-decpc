@@ -14,8 +14,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,14 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class NoteResourceIT {
 
-    private static final String DEFAULT_NOTE = "AAAAAAAAAA";
-    private static final String UPDATED_NOTE = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
+    private static final Double DEFAULT_NOTE = 1D;
+    private static final Double UPDATED_NOTE = 2D;
 
     @Autowired
     private NoteRepository noteRepository;
@@ -60,9 +52,7 @@ public class NoteResourceIT {
      */
     public static Note createEntity(EntityManager em) {
         Note note = new Note()
-            .note(DEFAULT_NOTE)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .note(DEFAULT_NOTE);
         return note;
     }
     /**
@@ -73,9 +63,7 @@ public class NoteResourceIT {
      */
     public static Note createUpdatedEntity(EntityManager em) {
         Note note = new Note()
-            .note(UPDATED_NOTE)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .note(UPDATED_NOTE);
         return note;
     }
 
@@ -100,8 +88,6 @@ public class NoteResourceIT {
         assertThat(noteList).hasSize(databaseSizeBeforeCreate + 1);
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getNote()).isEqualTo(DEFAULT_NOTE);
-        assertThat(testNote.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testNote.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -135,9 +121,7 @@ public class NoteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(note.getId().intValue())))
-            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE)))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.doubleValue())));
     }
     
     @Test
@@ -151,9 +135,7 @@ public class NoteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(note.getId().intValue()))
-            .andExpect(jsonPath("$.note").value(DEFAULT_NOTE))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.doubleValue()));
     }
 
     @Test
@@ -177,9 +159,7 @@ public class NoteResourceIT {
         // Disconnect from session so that the updates on updatedNote are not directly saved in db
         em.detach(updatedNote);
         updatedNote
-            .note(UPDATED_NOTE)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .note(UPDATED_NOTE);
 
         restNoteMockMvc.perform(put("/api/notes")
             .contentType(MediaType.APPLICATION_JSON)
@@ -191,8 +171,6 @@ public class NoteResourceIT {
         assertThat(noteList).hasSize(databaseSizeBeforeUpdate);
         Note testNote = noteList.get(noteList.size() - 1);
         assertThat(testNote.getNote()).isEqualTo(UPDATED_NOTE);
-        assertThat(testNote.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testNote.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

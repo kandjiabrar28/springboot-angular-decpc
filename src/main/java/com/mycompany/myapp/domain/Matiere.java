@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,7 +8,6 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,17 +34,17 @@ public class Matiere implements Serializable {
     @Column(name = "coefficient")
     private Double coefficient;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
-
-    @ManyToMany
+    @OneToMany(mappedBy = "matiere")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "matiere_correcteur",
-               joinColumns = @JoinColumn(name = "matiere_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "correcteur_id", referencedColumnName = "id"))
+    private Set<Note> notes = new HashSet<>();
+
+    @OneToMany(mappedBy = "matiere")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Tour> tours = new HashSet<>();
+
+    @ManyToMany(mappedBy = "matieres")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<Correcteur> correcteurs = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -95,30 +95,54 @@ public class Matiere implements Serializable {
         this.coefficient = coefficient;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
+    public Set<Note> getNotes() {
+        return notes;
     }
 
-    public Matiere dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public Matiere notes(Set<Note> notes) {
+        this.notes = notes;
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Matiere dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Matiere addNote(Note note) {
+        this.notes.add(note);
+        note.setMatiere(this);
         return this;
     }
 
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Matiere removeNote(Note note) {
+        this.notes.remove(note);
+        note.setMatiere(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+
+    public Set<Tour> getTours() {
+        return tours;
+    }
+
+    public Matiere tours(Set<Tour> tours) {
+        this.tours = tours;
+        return this;
+    }
+
+    public Matiere addTour(Tour tour) {
+        this.tours.add(tour);
+        tour.setMatiere(this);
+        return this;
+    }
+
+    public Matiere removeTour(Tour tour) {
+        this.tours.remove(tour);
+        tour.setMatiere(null);
+        return this;
+    }
+
+    public void setTours(Set<Tour> tours) {
+        this.tours = tours;
     }
 
     public Set<Correcteur> getCorrecteurs() {
@@ -170,8 +194,6 @@ public class Matiere implements Serializable {
             ", libmatiere='" + getLibmatiere() + "'" +
             ", noteelimin=" + getNoteelimin() +
             ", coefficient=" + getCoefficient() +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

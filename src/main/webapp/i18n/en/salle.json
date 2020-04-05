@@ -18,11 +18,8 @@
       },
       "numsalle": "Numsalle",
       "nomsalle": "Nomsalle",
-      "dateCreation": "Date Creation",
-      "dateModification": "Date Modification",
-      "tables": "Tables",
+      "table": "Table",
       "pvsurveillance": "Pvsurveillance",
-      "surveillant": "Surveillant",
       "centre": "Centre"
     }
   }

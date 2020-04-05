@@ -1,18 +1,13 @@
-import { Moment } from 'moment';
-import { ITables } from 'app/shared/model/tables.model';
+import { ITable } from 'app/shared/model/table.model';
 import { IPVSurveillance } from 'app/shared/model/pv-surveillance.model';
-import { ISurveillant } from 'app/shared/model/surveillant.model';
 import { ICentre } from 'app/shared/model/centre.model';
 
 export interface ISalle {
   id?: number;
   numsalle?: number;
   nomsalle?: string;
-  dateCreation?: Moment;
-  dateModification?: Moment;
-  tables?: ITables[];
-  pvsurveillance?: IPVSurveillance;
-  surveillants?: ISurveillant[];
+  tables?: ITable[];
+  pvsurveillances?: IPVSurveillance[];
   centre?: ICentre;
 }
 
@@ -21,11 +16,8 @@ export class Salle implements ISalle {
     public id?: number,
     public numsalle?: number,
     public nomsalle?: string,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
-    public tables?: ITables[],
-    public pvsurveillance?: IPVSurveillance,
-    public surveillants?: ISurveillant[],
+    public tables?: ITable[],
+    public pvsurveillances?: IPVSurveillance[],
     public centre?: ICentre
   ) {}
 }

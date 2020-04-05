@@ -82,12 +82,13 @@ public class CorrecteurResource {
     /**
      * {@code GET  /correcteurs} : get all the correcteurs.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of correcteurs in body.
      */
     @GetMapping("/correcteurs")
-    public List<Correcteur> getAllCorrecteurs() {
+    public List<Correcteur> getAllCorrecteurs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Correcteurs");
-        return correcteurRepository.findAll();
+        return correcteurRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -99,7 +100,7 @@ public class CorrecteurResource {
     @GetMapping("/correcteurs/{id}")
     public ResponseEntity<Correcteur> getCorrecteur(@PathVariable Long id) {
         log.debug("REST request to get Correcteur : {}", id);
-        Optional<Correcteur> correcteur = correcteurRepository.findById(id);
+        Optional<Correcteur> correcteur = correcteurRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(correcteur);
     }
 

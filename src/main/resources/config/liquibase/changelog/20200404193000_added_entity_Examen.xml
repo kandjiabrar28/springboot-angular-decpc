@@ -19,13 +19,7 @@
             <column name="nomexamen" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_creation" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_modification" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="tour_id" type="bigint">
+            <column name="date_examen" type="date">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -34,17 +28,6 @@
 
     <changeSet id="20200404193000-1-relations" author="jhipster">
 
-        <createTable tableName="examen_jury">
-            <column name="jury_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="examen_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="examen_id, jury_id" tableName="examen_jury"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
@@ -63,8 +46,7 @@
                   tableName="examen">
             <column name="id" type="numeric"/>
             <column name="nomexamen" type="string"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
+            <column name="date_examen" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

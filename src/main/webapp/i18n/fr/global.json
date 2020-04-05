@@ -21,6 +21,13 @@
         "tables": "Tables",
         "tAnonym": "T Anonym",
         "tour": "Tour",
+        "anonymat": "Anonymat",
+        "specialite": "Specialite",
+        "session": "Session",
+        "niveau": "Niveau",
+        "filiere": "Filiere",
+        "table": "Table",
+        "plageCopie": "Plage Copie",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -8,24 +8,6 @@
     -->
     <changeSet id="20200404193600-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="pvsurveillance_id"
-                                 baseTableName="salle"
-                                 constraintName="fk_salle_pvsurveillance_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="pv_surveillance"/>
-
-        <addForeignKeyConstraint baseColumnNames="salle_id"
-                                 baseTableName="salle_surveillant"
-                                 constraintName="fk_salle_surveillant_salle_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="salle"/>
-
-        <addForeignKeyConstraint baseColumnNames="surveillant_id"
-                                 baseTableName="salle_surveillant"
-                                 constraintName="fk_salle_surveillant_surveillant_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="surveillant"/>
-        
         <addForeignKeyConstraint baseColumnNames="centre_id"
                                  baseTableName="salle"
                                  constraintName="fk_salle_centre_id"

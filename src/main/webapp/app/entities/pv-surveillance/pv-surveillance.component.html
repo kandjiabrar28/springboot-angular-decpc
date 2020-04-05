@@ -27,8 +27,8 @@
                     <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.heureDeb">Heure Deb</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.heureFin">Heure Fin</span></th>
                     <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.datesurv">Datesurv</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.dateCreation">Date Creation</span></th>
-                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.dateModification">Date Modification</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.salle">Salle</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.pVSurveillance.surveillant">Surveillant</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -39,8 +39,16 @@
                     <td>{{ pVSurveillance.heureDeb | date:'medium' }}</td>
                     <td>{{ pVSurveillance.heureFin | date:'medium' }}</td>
                     <td>{{ pVSurveillance.datesurv | date:'mediumDate' }}</td>
-                    <td>{{ pVSurveillance.dateCreation | date:'mediumDate' }}</td>
-                    <td>{{ pVSurveillance.dateModification | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="pVSurveillance.salle">
+                            <a [routerLink]="['/salle', pVSurveillance.salle?.id, 'view']" >{{ pVSurveillance.salle?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="pVSurveillance.surveillant">
+                            <a [routerLink]="['/surveillant', pVSurveillance.surveillant?.id, 'view']" >{{ pVSurveillance.surveillant?.id }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

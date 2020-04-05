@@ -1,7 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { TourService } from 'app/entities/tour/tour.service';
 import { ITour, Tour } from 'app/shared/model/tour.model';
 
@@ -12,7 +10,6 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: ITour;
     let expectedResult: ITour | ITour[] | boolean | null;
-    let currentDate: moment.Moment;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,20 +19,13 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(TourService);
       httpMock = injector.get(HttpTestingController);
-      currentDate = moment();
 
-      elemDefault = new Tour(0, 0, currentDate, currentDate);
+      elemDefault = new Tour(0, 0);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign(
-          {
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -47,20 +37,12 @@ describe('Service Tests', () => {
       it('should create a Tour', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            id: 0
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.create(new Tour()).subscribe(resp => (expectedResult = resp.body));
 
@@ -72,20 +54,12 @@ describe('Service Tests', () => {
       it('should update a Tour', () => {
         const returnedFromService = Object.assign(
           {
-            numtour: 1,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            numtour: 1
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -97,20 +71,12 @@ describe('Service Tests', () => {
       it('should return a list of Tour', () => {
         const returnedFromService = Object.assign(
           {
-            numtour: 1,
-            dateCreation: currentDate.format(DATE_FORMAT),
-            dateModification: currentDate.format(DATE_FORMAT)
+            numtour: 1
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            dateCreation: currentDate,
-            dateModification: currentDate
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 

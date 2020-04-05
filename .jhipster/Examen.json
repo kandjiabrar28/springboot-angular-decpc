@@ -6,21 +6,22 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
+            "fieldName": "dateExamen",
             "fieldType": "LocalDate"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
+            "otherEntityName": "session",
+            "otherEntityRelationshipName": "examen",
+            "relationshipName": "session"
+        },
+        {
+            "relationshipType": "one-to-many",
             "otherEntityName": "tour",
             "otherEntityRelationshipName": "examen",
-            "relationshipName": "tour",
-            "otherEntityField": "id"
+            "relationshipName": "tour"
         },
         {
             "relationshipType": "many-to-many",
@@ -28,7 +29,7 @@
             "otherEntityRelationshipName": "examen",
             "relationshipName": "jury",
             "otherEntityField": "id",
-            "ownerSide": true
+            "ownerSide": false
         }
     ],
     "changelogDate": "20200404193000",

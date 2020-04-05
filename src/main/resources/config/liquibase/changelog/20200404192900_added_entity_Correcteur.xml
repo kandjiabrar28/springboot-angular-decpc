@@ -37,21 +37,23 @@
             <column name="sexe" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="datenais" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_creation" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_modification" type="date">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
 
     <changeSet id="20200404192900-1-relations" author="jhipster">
 
+        <createTable tableName="correcteur_matiere">
+            <column name="matiere_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="correcteur_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="correcteur_id, matiere_id" tableName="correcteur_matiere"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
@@ -76,9 +78,6 @@
             <column name="cni" type="string"/>
             <column name="telephone" type="string"/>
             <column name="sexe" type="string"/>
-            <column name="datenais" type="date"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

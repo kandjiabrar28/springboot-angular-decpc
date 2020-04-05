@@ -82,12 +82,13 @@ public class JuryResource {
     /**
      * {@code GET  /juries} : get all the juries.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of juries in body.
      */
     @GetMapping("/juries")
-    public List<Jury> getAllJuries() {
+    public List<Jury> getAllJuries(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Juries");
-        return juryRepository.findAll();
+        return juryRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -99,7 +100,7 @@ public class JuryResource {
     @GetMapping("/juries/{id}")
     public ResponseEntity<Jury> getJury(@PathVariable Long id) {
         log.debug("REST request to get Jury : {}", id);
-        Optional<Jury> jury = juryRepository.findById(id);
+        Optional<Jury> jury = juryRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(jury);
     }
 

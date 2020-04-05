@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterApp.anonymat.home.title">Anonymats</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-anonymat" [routerLink]="['/anonymat/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jhipsterApp.anonymat.home.createLabel">
+            Create a new Anonymat
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="anonymats?.length === 0">
+        <span jhiTranslate="jhipsterApp.anonymat.home.notFound">No anonymats found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="anonymats?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.anonymat.numanoymat">Numanoymat</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.anonymat.candidat">Candidat</span></th>
+                    <th scope="col" ><span jhiTranslate="jhipsterApp.anonymat.tour">Tour</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let anonymat of anonymats ;trackBy: trackId">
+                    <td><a [routerLink]="['/anonymat', anonymat.id, 'view']">{{ anonymat.id }}</a></td>
+                    <td>{{ anonymat.numanoymat }}</td>
+                    <td>
+                        <div *ngIf="anonymat.candidat">
+                            <a [routerLink]="['/candidat', anonymat.candidat?.id, 'view']" >{{ anonymat.candidat?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="anonymat.tour">
+                            <a [routerLink]="['/tour', anonymat.tour?.id, 'view']" >{{ anonymat.tour?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/anonymat', anonymat.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/anonymat', anonymat.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(anonymat)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

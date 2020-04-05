@@ -40,15 +40,6 @@
             <column name="datenais" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="date_creation" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="date_modification" type="date">
-                <constraints nullable="true" />
-            </column>
-            <column name="pvsurveillance_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
@@ -80,8 +71,6 @@
             <column name="telephone" type="string"/>
             <column name="sexe" type="string"/>
             <column name="datenais" type="date"/>
-            <column name="date_creation" type="date"/>
-            <column name="date_modification" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

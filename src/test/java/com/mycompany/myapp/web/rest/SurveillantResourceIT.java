@@ -56,12 +56,6 @@ public class SurveillantResourceIT {
     private static final LocalDate DEFAULT_DATENAIS = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATENAIS = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_DATE_CREATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_CREATION = LocalDate.now(ZoneId.systemDefault());
-
-    private static final LocalDate DEFAULT_DATE_MODIFICATION = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_MODIFICATION = LocalDate.now(ZoneId.systemDefault());
-
     @Autowired
     private SurveillantRepository surveillantRepository;
 
@@ -88,9 +82,7 @@ public class SurveillantResourceIT {
             .cni(DEFAULT_CNI)
             .telephone(DEFAULT_TELEPHONE)
             .sexe(DEFAULT_SEXE)
-            .datenais(DEFAULT_DATENAIS)
-            .dateCreation(DEFAULT_DATE_CREATION)
-            .dateModification(DEFAULT_DATE_MODIFICATION);
+            .datenais(DEFAULT_DATENAIS);
         return surveillant;
     }
     /**
@@ -108,9 +100,7 @@ public class SurveillantResourceIT {
             .cni(UPDATED_CNI)
             .telephone(UPDATED_TELEPHONE)
             .sexe(UPDATED_SEXE)
-            .datenais(UPDATED_DATENAIS)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .datenais(UPDATED_DATENAIS);
         return surveillant;
     }
 
@@ -142,8 +132,6 @@ public class SurveillantResourceIT {
         assertThat(testSurveillant.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
         assertThat(testSurveillant.getSexe()).isEqualTo(DEFAULT_SEXE);
         assertThat(testSurveillant.getDatenais()).isEqualTo(DEFAULT_DATENAIS);
-        assertThat(testSurveillant.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testSurveillant.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
     }
 
     @Test
@@ -184,9 +172,7 @@ public class SurveillantResourceIT {
             .andExpect(jsonPath("$.[*].cni").value(hasItem(DEFAULT_CNI)))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE)))
             .andExpect(jsonPath("$.[*].sexe").value(hasItem(DEFAULT_SEXE)))
-            .andExpect(jsonPath("$.[*].datenais").value(hasItem(DEFAULT_DATENAIS.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.toString())));
+            .andExpect(jsonPath("$.[*].datenais").value(hasItem(DEFAULT_DATENAIS.toString())));
     }
     
     @Test
@@ -207,9 +193,7 @@ public class SurveillantResourceIT {
             .andExpect(jsonPath("$.cni").value(DEFAULT_CNI))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE))
             .andExpect(jsonPath("$.sexe").value(DEFAULT_SEXE))
-            .andExpect(jsonPath("$.datenais").value(DEFAULT_DATENAIS.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.toString()));
+            .andExpect(jsonPath("$.datenais").value(DEFAULT_DATENAIS.toString()));
     }
 
     @Test
@@ -240,9 +224,7 @@ public class SurveillantResourceIT {
             .cni(UPDATED_CNI)
             .telephone(UPDATED_TELEPHONE)
             .sexe(UPDATED_SEXE)
-            .datenais(UPDATED_DATENAIS)
-            .dateCreation(UPDATED_DATE_CREATION)
-            .dateModification(UPDATED_DATE_MODIFICATION);
+            .datenais(UPDATED_DATENAIS);
 
         restSurveillantMockMvc.perform(put("/api/surveillants")
             .contentType(MediaType.APPLICATION_JSON)
@@ -261,8 +243,6 @@ public class SurveillantResourceIT {
         assertThat(testSurveillant.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
         assertThat(testSurveillant.getSexe()).isEqualTo(UPDATED_SEXE);
         assertThat(testSurveillant.getDatenais()).isEqualTo(UPDATED_DATENAIS);
-        assertThat(testSurveillant.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testSurveillant.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
     }
 
     @Test

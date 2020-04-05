@@ -28,33 +28,6 @@
                     <input type="number" class="form-control" name="coefficient" id="field_coefficient"
                            formControlName="coefficient"/>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.matiere.dateCreation" for="field_dateCreation">Date Creation</label>
-                    <div class="input-group">
-                        <input id="field_dateCreation" type="text" class="form-control" name="dateCreation" ngbDatepicker #dateCreationDp="ngbDatepicker" formControlName="dateCreation"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jhipsterApp.matiere.dateModification" for="field_dateModification">Date Modification</label>
-                    <div class="input-group">
-                        <input id="field_dateModification" type="text" class="form-control" name="dateModification" ngbDatepicker #dateModificationDp="ngbDatepicker" formControlName="dateModification"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dateModificationDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label jhiTranslate="jhipsterApp.matiere.correcteur" for="field_correcteurs">Correcteur</label>
-                    <select class="form-control" id="field_correcteurs" multiple name="correcteurs" formControlName="correcteurs">
-                        <option [ngValue]="getSelected(editForm.get('correcteurs')!.value, correcteurOption)" *ngFor="let correcteurOption of correcteurs; trackBy: trackById">{{ correcteurOption.id }}</option>
-                    </select>
-                </div>
             </div>
 
             <div>

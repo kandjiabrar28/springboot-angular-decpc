@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
-import { ITAnonym } from 'app/shared/model/t-anonym.model';
+import { ITable } from 'app/shared/model/table.model';
 import { INote } from 'app/shared/model/note.model';
+import { IAnonymat } from 'app/shared/model/anonymat.model';
 
 export interface ICandidat {
   id?: number;
@@ -12,10 +13,9 @@ export interface ICandidat {
   sexe?: string;
   datenais?: Moment;
   niveau?: string;
-  dateCreation?: Moment;
-  dateModification?: Moment;
-  tanonyms?: ITAnonym[];
+  table?: ITable;
   notes?: INote[];
+  anonymats?: IAnonymat[];
 }
 
 export class Candidat implements ICandidat {
@@ -29,9 +29,8 @@ export class Candidat implements ICandidat {
     public sexe?: string,
     public datenais?: Moment,
     public niveau?: string,
-    public dateCreation?: Moment,
-    public dateModification?: Moment,
-    public tanonyms?: ITAnonym[],
-    public notes?: INote[]
+    public table?: ITable,
+    public notes?: INote[],
+    public anonymats?: IAnonymat[]
   ) {}
 }

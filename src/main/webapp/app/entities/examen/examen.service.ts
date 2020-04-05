@@ -51,17 +51,14 @@ export class ExamenService {
 
   protected convertDateFromClient(examen: IExamen): IExamen {
     const copy: IExamen = Object.assign({}, examen, {
-      dateCreation: examen.dateCreation && examen.dateCreation.isValid() ? examen.dateCreation.format(DATE_FORMAT) : undefined,
-      dateModification:
-        examen.dateModification && examen.dateModification.isValid() ? examen.dateModification.format(DATE_FORMAT) : undefined
+      dateExamen: examen.dateExamen && examen.dateExamen.isValid() ? examen.dateExamen.format(DATE_FORMAT) : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.dateCreation = res.body.dateCreation ? moment(res.body.dateCreation) : undefined;
-      res.body.dateModification = res.body.dateModification ? moment(res.body.dateModification) : undefined;
+      res.body.dateExamen = res.body.dateExamen ? moment(res.body.dateExamen) : undefined;
     }
     return res;
   }
@@ -69,8 +66,7 @@ export class ExamenService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((examen: IExamen) => {
-        examen.dateCreation = examen.dateCreation ? moment(examen.dateCreation) : undefined;
-        examen.dateModification = examen.dateModification ? moment(examen.dateModification) : undefined;
+        examen.dateExamen = examen.dateExamen ? moment(examen.dateExamen) : undefined;
       });
     }
     return res;

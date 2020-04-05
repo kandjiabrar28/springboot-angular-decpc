@@ -59,6 +59,34 @@ import { RouterModule } from '@angular/router';
       {
         path: 'tour',
         loadChildren: () => import('./tour/tour.module').then(m => m.JhipsterTourModule)
+      },
+      {
+        path: 'anonymat',
+        loadChildren: () => import('./anonymat/anonymat.module').then(m => m.JhipsterAnonymatModule)
+      },
+      {
+        path: 'specialite',
+        loadChildren: () => import('./specialite/specialite.module').then(m => m.JhipsterSpecialiteModule)
+      },
+      {
+        path: 'session',
+        loadChildren: () => import('./session/session.module').then(m => m.JhipsterSessionModule)
+      },
+      {
+        path: 'niveau',
+        loadChildren: () => import('./niveau/niveau.module').then(m => m.JhipsterNiveauModule)
+      },
+      {
+        path: 'filiere',
+        loadChildren: () => import('./filiere/filiere.module').then(m => m.JhipsterFiliereModule)
+      },
+      {
+        path: 'table',
+        loadChildren: () => import('./table/table.module').then(m => m.JhipsterTableModule)
+      },
+      {
+        path: 'plage-copie',
+        loadChildren: () => import('./plage-copie/plage-copie.module').then(m => m.JhipsterPlageCopieModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

@@ -8,7 +8,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Tour.
@@ -27,11 +28,9 @@ public class Tour implements Serializable {
     @Column(name = "numtour")
     private Integer numtour;
 
-    @Column(name = "date_creation")
-    private LocalDate dateCreation;
-
-    @Column(name = "date_modification")
-    private LocalDate dateModification;
+    @OneToMany(mappedBy = "tour")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Anonymat> anonymats = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("tours")
@@ -39,7 +38,7 @@ public class Tour implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("tours")
-    private TAnonym tAnonym;
+    private Examen examen;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -63,30 +62,29 @@ public class Tour implements Serializable {
         this.numtour = numtour;
     }
 
-    public LocalDate getDateCreation() {
-        return dateCreation;
+    public Set<Anonymat> getAnonymats() {
+        return anonymats;
     }
 
-    public Tour dateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
+    public Tour anonymats(Set<Anonymat> anonymats) {
+        this.anonymats = anonymats;
         return this;
     }
 
-    public void setDateCreation(LocalDate dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-
-    public Tour dateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Tour addAnonymat(Anonymat anonymat) {
+        this.anonymats.add(anonymat);
+        anonymat.setTour(this);
         return this;
     }
 
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
+    public Tour removeAnonymat(Anonymat anonymat) {
+        this.anonymats.remove(anonymat);
+        anonymat.setTour(null);
+        return this;
+    }
+
+    public void setAnonymats(Set<Anonymat> anonymats) {
+        this.anonymats = anonymats;
     }
 
     public Matiere getMatiere() {
@@ -102,17 +100,17 @@ public class Tour implements Serializable {
         this.matiere = matiere;
     }
 
-    public TAnonym getTAnonym() {
-        return tAnonym;
+    public Examen getExamen() {
+        return examen;
     }
 
-    public Tour tAnonym(TAnonym tAnonym) {
-        this.tAnonym = tAnonym;
+    public Tour examen(Examen examen) {
+        this.examen = examen;
         return this;
     }
 
-    public void setTAnonym(TAnonym tAnonym) {
-        this.tAnonym = tAnonym;
+    public void setExamen(Examen examen) {
+        this.examen = examen;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -137,8 +135,6 @@ public class Tour implements Serializable {
         return "Tour{" +
             "id=" + getId() +
             ", numtour=" + getNumtour() +
-            ", dateCreation='" + getDateCreation() + "'" +
-            ", dateModification='" + getDateModification() + "'" +
             "}";
     }
 }

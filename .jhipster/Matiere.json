@@ -12,24 +12,28 @@
         {
             "fieldName": "coefficient",
             "fieldType": "Double"
-        },
-        {
-            "fieldName": "dateCreation",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "dateModification",
-            "fieldType": "LocalDate"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "note",
+            "otherEntityRelationshipName": "matiere",
+            "relationshipName": "note"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "tour",
+            "otherEntityRelationshipName": "matiere",
+            "relationshipName": "tour"
+        },
         {
             "relationshipType": "many-to-many",
             "otherEntityName": "correcteur",
             "otherEntityRelationshipName": "matiere",
             "relationshipName": "correcteur",
             "otherEntityField": "id",
-            "ownerSide": true
+            "ownerSide": false
         }
     ],
     "changelogDate": "20200404193200",

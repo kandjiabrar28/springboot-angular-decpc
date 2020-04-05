@@ -9,6 +9,12 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IPVSurveillance, PVSurveillance } from 'app/shared/model/pv-surveillance.model';
 import { PVSurveillanceService } from './pv-surveillance.service';
+import { ISalle } from 'app/shared/model/salle.model';
+import { SalleService } from 'app/entities/salle/salle.service';
+import { ISurveillant } from 'app/shared/model/surveillant.model';
+import { SurveillantService } from 'app/entities/surveillant/surveillant.service';
+
+type SelectableEntity = ISalle | ISurveillant;
 
 @Component({
   selector: 'jhi-pv-surveillance-update',
@@ -16,9 +22,9 @@ import { PVSurveillanceService } from './pv-surveillance.service';
 })
 export class PVSurveillanceUpdateComponent implements OnInit {
   isSaving = false;
+  salles: ISalle[] = [];
+  surveillants: ISurveillant[] = [];
   datesurvDp: any;
-  dateCreationDp: any;
-  dateModificationDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -26,11 +32,17 @@ export class PVSurveillanceUpdateComponent implements OnInit {
     heureDeb: [],
     heureFin: [],
     datesurv: [],
-    dateCreation: [],
-    dateModification: []
+    salle: [],
+    surveillant: []
   });
 
-  constructor(protected pVSurveillanceService: PVSurveillanceService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected pVSurveillanceService: PVSurveillanceService,
+    protected salleService: SalleService,
+    protected surveillantService: SurveillantService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ pVSurveillance }) => {
@@ -41,6 +53,10 @@ export class PVSurveillanceUpdateComponent implements OnInit {
       }
 
       this.updateForm(pVSurveillance);
+
+      this.salleService.query().subscribe((res: HttpResponse<ISalle[]>) => (this.salles = res.body || []));
+
+      this.surveillantService.query().subscribe((res: HttpResponse<ISurveillant[]>) => (this.surveillants = res.body || []));
     });
   }
 
@@ -51,8 +67,8 @@ export class PVSurveillanceUpdateComponent implements OnInit {
       heureDeb: pVSurveillance.heureDeb ? pVSurveillance.heureDeb.format(DATE_TIME_FORMAT) : null,
       heureFin: pVSurveillance.heureFin ? pVSurveillance.heureFin.format(DATE_TIME_FORMAT) : null,
       datesurv: pVSurveillance.datesurv,
-      dateCreation: pVSurveillance.dateCreation,
-      dateModification: pVSurveillance.dateModification
+      salle: pVSurveillance.salle,
+      surveillant: pVSurveillance.surveillant
     });
   }
 
@@ -78,8 +94,8 @@ export class PVSurveillanceUpdateComponent implements OnInit {
       heureDeb: this.editForm.get(['heureDeb'])!.value ? moment(this.editForm.get(['heureDeb'])!.value, DATE_TIME_FORMAT) : undefined,
       heureFin: this.editForm.get(['heureFin'])!.value ? moment(this.editForm.get(['heureFin'])!.value, DATE_TIME_FORMAT) : undefined,
       datesurv: this.editForm.get(['datesurv'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value
+      salle: this.editForm.get(['salle'])!.value,
+      surveillant: this.editForm.get(['surveillant'])!.value
     };
   }
 
@@ -97,5 +113,9 @@ export class PVSurveillanceUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 }

@@ -9,10 +9,12 @@ import { INote, Note } from 'app/shared/model/note.model';
 import { NoteService } from './note.service';
 import { IMatiere } from 'app/shared/model/matiere.model';
 import { MatiereService } from 'app/entities/matiere/matiere.service';
+import { ICorrecteur } from 'app/shared/model/correcteur.model';
+import { CorrecteurService } from 'app/entities/correcteur/correcteur.service';
 import { ICandidat } from 'app/shared/model/candidat.model';
 import { CandidatService } from 'app/entities/candidat/candidat.service';
 
-type SelectableEntity = IMatiere | ICandidat;
+type SelectableEntity = IMatiere | ICorrecteur | ICandidat;
 
 @Component({
   selector: 'jhi-note-update',
@@ -21,22 +23,21 @@ type SelectableEntity = IMatiere | ICandidat;
 export class NoteUpdateComponent implements OnInit {
   isSaving = false;
   matieres: IMatiere[] = [];
+  correcteurs: ICorrecteur[] = [];
   candidats: ICandidat[] = [];
-  dateCreationDp: any;
-  dateModificationDp: any;
 
   editForm = this.fb.group({
     id: [],
     note: [],
-    dateCreation: [],
-    dateModification: [],
     matiere: [],
+    correcteur: [],
     candidat: []
   });
 
   constructor(
     protected noteService: NoteService,
     protected matiereService: MatiereService,
+    protected correcteurService: CorrecteurService,
     protected candidatService: CandidatService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -48,6 +49,8 @@ export class NoteUpdateComponent implements OnInit {
 
       this.matiereService.query().subscribe((res: HttpResponse<IMatiere[]>) => (this.matieres = res.body || []));
 
+      this.correcteurService.query().subscribe((res: HttpResponse<ICorrecteur[]>) => (this.correcteurs = res.body || []));
+
       this.candidatService.query().subscribe((res: HttpResponse<ICandidat[]>) => (this.candidats = res.body || []));
     });
   }
@@ -56,9 +59,8 @@ export class NoteUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: note.id,
       note: note.note,
-      dateCreation: note.dateCreation,
-      dateModification: note.dateModification,
       matiere: note.matiere,
+      correcteur: note.correcteur,
       candidat: note.candidat
     });
   }
@@ -82,9 +84,8 @@ export class NoteUpdateComponent implements OnInit {
       ...new Note(),
       id: this.editForm.get(['id'])!.value,
       note: this.editForm.get(['note'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value,
       matiere: this.editForm.get(['matiere'])!.value,
+      correcteur: this.editForm.get(['correcteur'])!.value,
       candidat: this.editForm.get(['candidat'])!.value
     };
   }

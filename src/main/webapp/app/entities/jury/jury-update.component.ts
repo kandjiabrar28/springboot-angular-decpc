@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IJury, Jury } from 'app/shared/model/jury.model';
 import { JuryService } from './jury.service';
+import { IExamen } from 'app/shared/model/examen.model';
+import { ExamenService } from 'app/entities/examen/examen.service';
 
 @Component({
   selector: 'jhi-jury-update',
@@ -14,21 +16,26 @@ import { JuryService } from './jury.service';
 })
 export class JuryUpdateComponent implements OnInit {
   isSaving = false;
-  dateCreationDp: any;
-  dateModificationDp: any;
+  examen: IExamen[] = [];
 
   editForm = this.fb.group({
     id: [],
     numjury: [],
-    dateCreation: [],
-    dateModification: []
+    examen: []
   });
 
-  constructor(protected juryService: JuryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected juryService: JuryService,
+    protected examenService: ExamenService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ jury }) => {
       this.updateForm(jury);
+
+      this.examenService.query().subscribe((res: HttpResponse<IExamen[]>) => (this.examen = res.body || []));
     });
   }
 
@@ -36,8 +43,7 @@ export class JuryUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: jury.id,
       numjury: jury.numjury,
-      dateCreation: jury.dateCreation,
-      dateModification: jury.dateModification
+      examen: jury.examen
     });
   }
 
@@ -60,8 +66,7 @@ export class JuryUpdateComponent implements OnInit {
       ...new Jury(),
       id: this.editForm.get(['id'])!.value,
       numjury: this.editForm.get(['numjury'])!.value,
-      dateCreation: this.editForm.get(['dateCreation'])!.value,
-      dateModification: this.editForm.get(['dateModification'])!.value
+      examen: this.editForm.get(['examen'])!.value
     };
   }
 
@@ -79,5 +84,20 @@ export class JuryUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IExamen): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: IExamen[], option: IExamen): IExamen {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

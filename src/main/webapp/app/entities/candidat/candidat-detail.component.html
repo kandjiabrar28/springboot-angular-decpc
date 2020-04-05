@@ -40,13 +40,11 @@
                 <dd>
                     <span>{{ candidat.niveau }}</span>
                 </dd>
-                <dt><span jhiTranslate="jhipsterApp.candidat.dateCreation">Date Creation</span></dt>
+                <dt><span jhiTranslate="jhipsterApp.candidat.table">Table</span></dt>
                 <dd>
-                    <span>{{ candidat.dateCreation }}</span>
-                </dd>
-                <dt><span jhiTranslate="jhipsterApp.candidat.dateModification">Date Modification</span></dt>
-                <dd>
-                    <span>{{ candidat.dateModification }}</span>
+                    <div *ngIf="candidat.table">
+                        <a [routerLink]="['/table', candidat.table?.id, 'view']">{{ candidat.table?.id }}</a>
+                    </div>
                 </dd>
             </dl>
 
