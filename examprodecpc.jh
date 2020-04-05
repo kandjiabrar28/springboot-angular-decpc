@@ -1,0 +1,156 @@
+
+
+application {
+    config {
+        prodDatabaseType mysql
+        buildTool maven
+    }
+    entities *
+}
+entity Salle {
+    numsalle Integer,
+    nomsalle String,
+}
+entity Surveillant {
+    fonction String,
+    prenom String,
+    nom String,
+    provenance String,
+    cni String,
+    telephone String,
+    sexe String,
+    datenais LocalDate,
+}
+entity PVSurveillance {
+    epreuve String,
+    heureDeb ZonedDateTime,
+    heureFin ZonedDateTime,
+    datesurv LocalDate,
+}
+entity Examen {
+	nomexamen String,
+    dateExamen LocalDate
+}
+entity Tour {
+	numtour Integer,
+}
+entity Anonymat {
+	numanoymat Integer
+}
+entity Specialite {
+	libspec String
+}
+entity Session {
+	dateSession LocalDate
+}
+entity Niveau {
+	libniveau String
+}
+entity Filiere {
+	libfiliere String,
+}
+entity Jury {
+	numjury Integer,
+}
+entity Centre {
+	nom String,
+    region String,
+    departement String,
+    telephone String,
+    email String
+}
+entity Candidat{
+ 	prenom String,
+    nom String,
+    provenance String,
+    cni String,
+    telephone String,
+    sexe String,
+    datenais LocalDate,
+ 	niveau String}
+entity Table {
+    numtable Integer
+}
+entity Matiere {
+	
+    libmatiere String,
+    noteelimin Double,
+    coefficient Double
+}
+entity Correcteur {
+	grade String,
+    prenom String,
+    nom String,
+    provenance String,
+    cni String,
+    telephone String,
+    sexe String
+}
+entity Note {
+    note Double
+}
+entity PlageCopie {
+    plage String,
+    typecopie String,
+    nombrecopie Integer,
+}
+relationship OneToMany{
+	Correcteur{plagecopie} to PlageCopie{correcteur}
+}
+relationship OneToMany{
+	Matiere{note} to Note{matiere}
+}
+relationship OneToMany{
+	Correcteur{note} to Note{correcteur}
+}
+relationship OneToMany{
+	Candidat{note} to Note{candidat}
+}
+relationship ManyToMany{
+	Correcteur{matiere} to Matiere{correcteur}
+}
+relationship OneToMany{
+	Matiere{tour} to Tour{matiere}
+}
+relationship OneToOne{
+	Candidat{table} to Table{candidat}
+}
+relationship OneToMany{
+	Candidat{anonymat} to Anonymat{candidat}
+}
+relationship OneToMany{
+	Salle{table} to Table{salle}
+}
+relationship OneToMany{
+	Centre{salle} to Salle{centre}
+}
+relationship ManyToMany{
+	Jury{examen} to Examen{jury}
+}
+
+relationship ManyToMany{
+	Specialite{niveau} to Niveau{specialite}
+}
+relationship OneToMany{
+	Examen{session} to Session{examen}
+}
+relationship OneToMany{
+	Examen{tour} to Tour{examen}
+}
+relationship OneToMany{
+	Tour{anonymat} to Anonymat{tour}
+}
+
+relationship ManyToOne{
+	Specialite{session} to Session{specialite}
+}
+relationship ManyToOne{
+	Filiere{specialite} to Specialite{filiere}
+}
+
+relationship OneToMany{
+	Salle{pvsurveillance} to PVSurveillance{salle}
+}
+relationship ManyToOne{
+	Surveillant{pvsurveillance} to PVSurveillance{surveillant}
+}
